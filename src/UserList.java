@@ -35,4 +35,24 @@ public class UserList {
         return pwd;
     }
 
+    public User whoSignin(){
+        User user = null;
+        for (User u : userArray) {
+            if (u.isOn()) {
+                user = u;
+            }
+        }
+        return user;
+    }
+
+    public void changeUserState(String userid){
+        for (User user : userArray) {
+            if (user.getId().equals(userid)) {
+                user.setOn();
+            }
+        }
+    }
+
+
+
 }

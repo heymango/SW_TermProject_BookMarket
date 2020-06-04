@@ -24,8 +24,8 @@ public class SignUpGUI extends JFrame {
         setVisible(true);
     }
     public void signUpPanel(JPanel panel){
-        Font font1 = new Font(null,Font.BOLD,25);
-        Font font2 = new Font(null,Font.BOLD,15);
+        Font font1 = new Font("배달의민족 을지로체 TTF",0,25);
+        Font font2 = new Font("배달의민족 을지로체 TTF",0,15);
         panel.setLayout(null);
         panel.setBackground(Color.WHITE);
 

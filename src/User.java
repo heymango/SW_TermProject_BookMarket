@@ -8,6 +8,7 @@ public class User {
     private final String email;
     private final boolean isAdmin;
     private boolean isActivate;
+    private boolean isOn = false;
    /* ArrayList<Book> userBookList = new ArrayList<Book>();
     public void addBookToUser(Book book){
         userBookList.add(book);
@@ -60,8 +61,16 @@ public class User {
         isActivate = true;
     }
 
+    public boolean isOn() {
+        return isOn;
+    }
+
+    public void setOn() {
+        isOn = !isOn;
+    }
+
     public void print(){
-        System.out.println("id:"+id+" pw:"+password+" name:"+username+" phone:"+phone+" email:"+email+" isActive:"+isActivate+" isAdmin:"+isAdmin);
+        System.out.println("id:"+id+" pw:"+password+" name:"+username+" phone:"+phone+" email:"+email+" isActive:"+isActivate+" isAdmin:"+isAdmin+" State:"+isOn+"\n");
     }
 
 }

@@ -4,10 +4,10 @@ public class Book {
     private String author;
     private String publisher;
     private String publishYear;
-    private int condition;
+    private String condition;
     private final String user;
-    String[] cond = {"Excellent", "Good", "Fair"};
-    public Book(String Title, String isbn, String Author, String Publisher, String PublishYear, int Condition, String User){
+   // String[] cond = {"Excellent", "Good", "Fair"};
+    public Book(String Title, String isbn, String Author, String Publisher, String PublishYear, String Condition, String User){
         title =Title;
         ISBN =isbn;
         author =Author;
@@ -17,7 +17,7 @@ public class Book {
         user = User;
     }
 
-    public int getCondition() {
+    public String getCondition() {
         return condition;
     }
 
@@ -41,9 +41,6 @@ public class Book {
         return title;
     }
 
-    public String getCond() {
-        return cond[condition];
-    }
 
     public String getUser() {
         return user;
@@ -53,7 +50,7 @@ public class Book {
         this.author = author;
     }
 
-    public void setCondition(int condition) {
+    public void setCondition(String condition) {
         this.condition = condition;
     }
 
@@ -72,4 +69,8 @@ public class Book {
     public void setTitle(String title) {
         this.title = title;
     }
+    public void print(){
+        System.out.println("title:"+title+"user:"+user+"\n");
+    }
+
 }

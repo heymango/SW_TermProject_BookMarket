@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public class SignInGUI extends JFrame {
         private JTextField userid;
         private JPasswordField userpwd;
-        //private boolean signinCheck = true;
-        private int errorcode;
+        Font font = new Font("배달의민족 을지로체 TTF",0,13);
         UserList user;
         BookList bookList;
         public SignInGUI(UserList User, BookList BookList){
@@ -23,11 +22,13 @@ public class SignInGUI extends JFrame {
             JPanel panel = new JPanel();
             loginPanel(panel);
             add(panel,BorderLayout.CENTER);
+            setFont(font);
             setVisible(true);
         }
 
+
+
     public void loginPanel(JPanel panel) {
-        Font font = new Font(null,Font.BOLD,13);
         panel.setLayout(null);
         panel.setBackground(Color.WHITE);
         JLabel userLabel = new JLabel("User ID");
@@ -82,6 +83,7 @@ public class SignInGUI extends JFrame {
         else if(user.isUserThere(userid.getText())){
             if(p.equals(user.userPwd(userid.getText()))){
                 System.out.println("success");
+                user.changeUserState(userid.getText());
                 new HomeGUI(user,bookList);
                 dispose();
             }
