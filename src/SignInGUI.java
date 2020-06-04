@@ -13,13 +13,13 @@ public class SignInGUI extends JFrame {
         BookList bookList;
         public SignInGUI(UserList User, BookList BookList){
             super("Sign In");
+            user = User;
+            bookList = BookList;
             setSize(300,160);
             setVisible(true);
             setResizable(false);
             setLayout(new BorderLayout());
             setDefaultCloseOperation(EXIT_ON_CLOSE);
-            user = User;
-            bookList = BookList;
             JPanel panel = new JPanel();
             loginPanel(panel);
             add(panel,BorderLayout.CENTER);
@@ -83,6 +83,7 @@ public class SignInGUI extends JFrame {
             if(p.equals(user.userPwd(userid.getText()))){
                 System.out.println("success");
                 new HomeGUI(user,bookList);
+                dispose();
             }
 
             else{

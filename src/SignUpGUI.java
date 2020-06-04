@@ -8,6 +8,8 @@ import java.awt.event.KeyListener;
 public class SignUpGUI extends JFrame {
     UserList userList;
     BookList bookList;
+    private JTextField userid;
+    private Boolean checkId = false;
     public SignUpGUI(UserList UserList, BookList BookList){
         super("Sign Up");
         setSize(450, 400);
@@ -38,7 +40,7 @@ public class SignUpGUI extends JFrame {
         userIDText.setFont(font2);
         panel.add(userIDText);
 
-        JTextField userid = new JTextField(20);
+        userid = new JTextField(20);
         userid.setBounds(90, 70, 160, 25);
         panel.add(userid);
 
@@ -132,7 +134,9 @@ public class SignUpGUI extends JFrame {
         signUpbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                checkSignUp();
+                String phone = phone1.getText()+phone2.getText()+phone3.getText();
+                String mail = mail1.getText()+"@"+mail2.getText();
+                checkSignUp(userid.getText(),pwd.getText(),name.getText(),phone,mail);
             }
         });
 
@@ -169,11 +173,58 @@ public class SignUpGUI extends JFrame {
     }
 
     public void checkDuplicate(){
-
+        if(userid.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Enter the ID");
+        }
+        else if(userList.isUserThere(userid.getText())){
+            JOptionPane.showMessageDialog(null, "Duplicate ID");
+            userid.setText("");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Available ID");
+            checkId = true;
+        }
     }
-    public void checkSignUp(){
 
+    public void checkSignUp(String Id, String Pwd, String Name, String Phone, String Mail){
+
+        if(Id.equals("")){
+            JOptionPane.showMessageDialog(null, "Enter ID");
+            return;
+        }
+        if(!checkId){
+            JOptionPane.showMessageDialog(null, "Check ID Duplicate");
+            return;
+        }
+        if(Pwd.equals("")){
+            JOptionPane.showMessageDialog(null, "Enter Password");
+            return;
+        }
+
+        if(Name.equals("")){
+            JOptionPane.showMessageDialog(null, "Enter Name");
+            return;
+        }
+
+        if(Phone.equals("")){
+            JOptionPane.showMessageDialog(null, "Enter Phone number");
+            return;
+        }
+        if(Mail.equals("")){
+            JOptionPane.showMessageDialog(null, "Enter Email");
+            return;
+        }
+        if(Id.equals("admin")){
+            User user = new User(Id,Pwd,Name,Phone,Mail,true);
+        }
+
+        User user = new User(Id,Pwd,Name,Phone,Mail,false);
+        userList.addUser(user);
+        JOptionPane.showMessageDialog(null, "Sign Up Success!");
+        new SignInGUI(userList,bookList);
+        dispose();
     }
+
 
 
 
