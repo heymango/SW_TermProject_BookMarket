@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 public class SaveToFile {
     UserList userList;
     BookList bookList;
-    String Book = "C:\\Users\\Sojeong\\IdeaProjects\\SW_TermProject\\Book.csv";
-    String User= "C:\\Users\\Sojeong\\IdeaProjects\\SW_TermProject\\User.csv";
+    String Book = "Book.csv";
+    String User= "User.csv";
     public SaveToFile(UserList UserList, BookList BookList, String UserFileName, String BookFileNme){
         User = UserFileName;
         Book = BookFileNme;

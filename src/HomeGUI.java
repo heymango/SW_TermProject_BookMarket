@@ -23,16 +23,7 @@ public class HomeGUI extends JFrame {
         for(int i=0; i<bookList.bookArray.size(); i++){
             bookList.bookArray.get(i).print();
         }
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosing(WindowEvent e) {
-                super.windowClosing(e);
-                userList.changeUserState(userList.whoSignin().getId());
-                new SaveToFile(userList,bookList);
-            }
-        });
-
+        new BookGUI(userList,bookList);
 
     }
 
