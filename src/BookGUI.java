@@ -12,13 +12,18 @@ public class BookGUI extends JFrame {
         setSize(450, 450);
         userList = UserList;
         bookList = BookList;
-        setResizable(false);
         setLayout(new BorderLayout());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         BookPanel(panel);
         add(panel, BorderLayout.CENTER);
+        init();
+
+    }
+    public void init(){
+        setLocationRelativeTo(null);
         setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     public void BookPanel(JPanel panel){

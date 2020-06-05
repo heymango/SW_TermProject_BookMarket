@@ -15,14 +15,20 @@ public class SignUpGUI extends JFrame {
         setSize(450, 400);
         userList = UserList;
         bookList = BookList;
-        setResizable(false);
+        init();
         setLayout(new BorderLayout());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         JPanel panel = new JPanel();
         signUpPanel(panel);
         add(panel, BorderLayout.CENTER);
-        setVisible(true);
+
     }
+    public void init(){
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
+
     public void signUpPanel(JPanel panel){
         Font font1 = new Font("배달의민족 을지로체 TTF",0,25);
         Font font2 = new Font("배달의민족 을지로체 TTF",0,15);

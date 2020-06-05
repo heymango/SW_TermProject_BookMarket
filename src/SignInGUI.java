@@ -15,16 +15,21 @@ public class SignInGUI extends JFrame {
             user = User;
             bookList = BookList;
             setSize(300,160);
-            setVisible(true);
-            setResizable(false);
+            init();
             setLayout(new BorderLayout());
-            setDefaultCloseOperation(EXIT_ON_CLOSE);
             JPanel panel = new JPanel();
             loginPanel(panel);
             add(panel,BorderLayout.CENTER);
             setFont(font);
             setVisible(true);
         }
+
+    public void init(){
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+    }
 
 
 
