@@ -5,8 +5,9 @@ public class Main {
         String Book = "Book.csv";
         String User = "User.csv";
         new ReadFileToList(userList, bookList ,User,Book);
-        //SignInGUI gui = new SignInGUI(userList,bookList);
-        HomeGUI home = new HomeGUI(userList, bookList);
+        SignInGUI gui = new SignInGUI(userList,bookList);
+        //BookGUI book = new BookGUI(userList,bookList);
+        //HomeGUI home = new HomeGUI(userList, bookList);
 
 
         for(int i=0; i<userList.numUser(); i++){

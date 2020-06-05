@@ -6,12 +6,14 @@ import java.awt.event.ActionListener;
 public class BookGUI extends JFrame {
     UserList userList;
     BookList bookList;
+    HomeGUI homeGUI;
     private Boolean checkId = false;
-    public BookGUI(UserList UserList, BookList BookList){
+    public BookGUI(UserList UserList, BookList BookList, HomeGUI homeGUI){
         super("AddBook");
         setSize(450, 450);
         userList = UserList;
         bookList = BookList;
+        this.homeGUI = homeGUI;
         setLayout(new BorderLayout());
         JPanel panel = new JPanel();
         BookPanel(panel);
@@ -23,7 +25,6 @@ public class BookGUI extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
     public void BookPanel(JPanel panel){
@@ -128,8 +129,9 @@ public class BookGUI extends JFrame {
         Book book = new Book(Title,ISBN,Author,Publisher,Year,Condition,userList.whoSignin().getId());
         bookList.bookArray.add(book);
         JOptionPane.showMessageDialog(null, "Add Book!");
-        new HomeGUI(userList,bookList);
         dispose();
+        homeGUI.updatePanel();
+
     }
 
 }

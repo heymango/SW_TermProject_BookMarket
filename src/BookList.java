@@ -5,5 +5,9 @@ public class BookList {
     public void addBook(Book book) {
         this.bookArray.add(book);
     }
+    public Book getBook(int i){
+        return this.bookArray.get(i);
+    }
+
 
 }

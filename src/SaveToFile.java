@@ -32,7 +32,20 @@ public class SaveToFile {
         BufferedWriter bufWriter = null;
         try{
             bufWriter = Files.newBufferedWriter(Paths.get(Book), StandardCharsets.UTF_8);
-
+            bufWriter.write("Title");
+            bufWriter.write(",");
+            bufWriter.write("ISBN");
+            bufWriter.write(",");
+            bufWriter.write("Author");
+            bufWriter.write(",");
+            bufWriter.write("Publisher");
+            bufWriter.write(",");
+            bufWriter.write("Year");
+            bufWriter.write(",");
+            bufWriter.write("Condition");
+            bufWriter.write(",");
+            bufWriter.write("Owner");
+            bufWriter.newLine();
             for(Book book : bookList.bookArray){
                 bufWriter.write(book.getTitle());
                 bufWriter.write(",");

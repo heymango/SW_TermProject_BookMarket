@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Button extends JButton {
-    Font font = new Font("배달의민족 을지로체 TTF",0,13);
+    Font font = new Font("배달의민족 한나체 Pro",0,13);
     public Button() { super(); decorate();}
     public Button(String text) { super(text); decorate();}
     public Button(Action action) { super(action); decorate(); }

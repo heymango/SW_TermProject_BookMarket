@@ -15,14 +15,14 @@ public class User {
     }
 
     */
-    public User(String Id, String Password, String Username, String Phone, String Email, boolean IsAdmin){
+    public User(String Id, String Password, String Username, String Phone, String Email, boolean IsActivate, boolean IsAdmin){
         id = Id;
         password = Password;
         username = Username;
         phone = Phone;
         email = Email;
         isAdmin = IsAdmin;
-        isActivate = true;
+        isActivate = IsActivate;
     }
 
     public String getEmail() {

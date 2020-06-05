@@ -221,10 +221,10 @@ public class SignUpGUI extends JFrame {
             return;
         }
         if(Id.equals("admin")){
-            User user = new User(Id,Pwd,Name,Phone,Mail,true);
+            User user = new User(Id,Pwd,Name,Phone,Mail,true,true);
         }
 
-        User user = new User(Id,Pwd,Name,Phone,Mail,false);
+        User user = new User(Id,Pwd,Name,Phone,Mail,true,false);
         userList.addUser(user);
         JOptionPane.showMessageDialog(null, "Sign Up Success!");
         new SignInGUI(userList,bookList);
