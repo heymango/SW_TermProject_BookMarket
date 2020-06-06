@@ -1,7 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class LineGUI extends JPanel {
+    Boolean selected = false;
+    Book book;
+    int index;
     Font font = new Font("배달의민족 한나체 Pro",0,17);
     JLabel title, isbn, author, publishyear, publisher, condition, owner,checkbox;
     public LineGUI(){
@@ -17,14 +22,23 @@ public class LineGUI extends JPanel {
         add(init("출판사"));
         add(init("출판년도"));
         add(init("상태"));
-        add(init("등록인"));
+        add(init("판매자"));
 
     }
 
-    public LineGUI(String title, String isbn, String author, String publisher, String publishyear, String condition, String owner){
+    public LineGUI(Book book){
+        this.book = book;
+        String title = book.getTitle();
+        String isbn = book.getISBN();
+        String author = book.getAuthor();
+        String publisher = book.getPublisher();
+        String publishyear = book.getPublishYear();
+        String condition = book.getCondition();
+        String owner= book.getUser();
         setLayout(new GridLayout(1,9));
         setVisible(true);
         setBackground(Color.white);
+        System.out.println(index);
         JCheckBox checkbox = new JCheckBox("",false);
         checkbox.setBackground(Color.white);
         checkbox.setHorizontalAlignment(0);
@@ -36,6 +50,12 @@ public class LineGUI extends JPanel {
         add(init2(publishyear));
         add(init2(condition));
         add(init2(owner));
+        checkbox.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                selected = !selected;
+            }
+        });
     }
 
     public JLabel init(String s){

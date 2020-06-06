@@ -6,6 +6,7 @@ public class Book {
     private String publishYear;
     private String condition;
     private final String user;
+    private int index;
    // String[] cond = {"Excellent", "Good", "Fair"};
     public Book(String Title, String isbn, String Author, String Publisher, String PublishYear, String Condition, String User){
         title =Title;
@@ -73,4 +74,11 @@ public class Book {
         System.out.println("title:"+title+"user:"+user+"\n");
     }
 
+    public int getIndex() {
+        return index;
+    }
+
+    public void setIndex(int index) {
+        this.index = index;
+    }
 }

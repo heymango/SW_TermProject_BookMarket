@@ -35,6 +35,16 @@ public class UserList {
         return pwd;
     }
 
+    public String userMail(String username) {
+        String mail = null;
+        for (User user : userArray) {
+            if (user.getId().equals(username)) {
+                mail =user.getEmail();
+            }
+        }
+        return mail;
+    }
+
     public User whoSignin(){
         User user = null;
         for (User u : userArray) {
