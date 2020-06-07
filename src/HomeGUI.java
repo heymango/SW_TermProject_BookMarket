@@ -11,16 +11,18 @@ public class HomeGUI extends JFrame {
     UserList userList;
     BookList bookList;
     JPanel background;
+    JPanel top;
     listArea home;
+    String user;
 
     public HomeGUI(UserList Userlist, BookList BookList) {
         super("Main");
-
         setSize(1100, 700);
         setBackground(Color.WHITE);
         userList = Userlist;
         bookList = BookList;
         print();
+        user = userList.whoSignin().getId();
         homeGUI =this;
         //Background panel
         background = new JPanel();
@@ -30,7 +32,6 @@ public class HomeGUI extends JFrame {
         basicGUI(background);
         add(background);
         init();
-
 
     }
 
@@ -47,7 +48,7 @@ public class HomeGUI extends JFrame {
 
     }
     public void top(JPanel background){
-        JPanel top = new JPanel();
+        top = new JPanel();
         top.setBackground(Color.WHITE);
         top.setBounds(0, 0, 1100, 100);
         top.setLayout(null);
@@ -58,6 +59,13 @@ public class HomeGUI extends JFrame {
         HomeTxt.setFont(ui.font1);
         HomeTxt.setForeground(ui.g);
         top.add(HomeTxt);
+
+        JLabel userTxt = new JLabel(user+" 님도 역시");
+        userTxt.setBounds(10, 0, 400, 20);
+        userTxt.setFont(ui.font);
+        userTxt.setForeground(ui.g);
+        top.add(userTxt);
+
         background.add(top);
 
         //Search Area
@@ -137,6 +145,7 @@ public class HomeGUI extends JFrame {
         editBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                new MyBook(userList,bookList,homeGUI);
 
             }
         });
@@ -145,7 +154,6 @@ public class HomeGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                new SignInGUI(userList,bookList);
             }
         });
 
@@ -178,7 +186,7 @@ public class HomeGUI extends JFrame {
             home.printsearchBook(searchResult);
             home.revalidate();
             home.repaint();
-            home.SearchMode = true;
+            home.mode = 1;
         }
 
     }

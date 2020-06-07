@@ -89,8 +89,20 @@ public class SignInGUI extends JFrame {
             if(p.equals(user.userPwd(userid.getText()))){
                 System.out.println("success");
                 user.changeUserState(userid.getText());
-                new HomeGUI(user,bookList);
-                dispose();
+                if(userid.getText().equals("admin")) {
+                    new AdminHomeGUI(user,bookList);
+                    dispose();
+                }
+                else{
+                    if(user.getUser(userid.getText()).isActivate()) {
+                        new HomeGUI(user, bookList);
+                        dispose();
+                    }
+                    else{
+                        JOptionPane.showMessageDialog(null, "Deactivated user");
+                    }
+                }
+
             }
 
             else{

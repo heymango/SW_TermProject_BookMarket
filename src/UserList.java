@@ -63,6 +63,16 @@ public class UserList {
         }
     }
 
+    public User getUser(String userid){
+        User u = null;
+        for (User user : userArray) {
+            if (user.getId().equals(userid)) {
+                u =user;
+            }
+        }
+        return u;
+    }
+
 
 
 }

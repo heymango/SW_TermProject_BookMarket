@@ -17,6 +17,16 @@ public class BookList {
         }
         return false;
     }
+    public Book bookOwner(String owner){
+        Book book = null;
+        for(Book b: bookArray){
+            if(b.getUser().equals(owner)){
+                book = b;
+            }
+        }
+        return book;
+    }
+
 
     public ArrayList<Book> searchBook(String search, String selected) {
         ArrayList<Book> searchResult = new ArrayList<Book>();
