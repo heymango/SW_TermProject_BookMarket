@@ -10,10 +10,8 @@ public class EditUser extends JFrame {
     BookList bookList;
     BookList myBook = new BookList();
     listArea edit;
-    HomeGUI  homeGUI;
     public EditUser(UserList userList, BookList bookList){
         super("Users");
-        this.homeGUI = homeGUI;
         this.userList = userList;
         this.bookList = bookList;
         setSize(880,640);
@@ -23,10 +21,10 @@ public class EditUser extends JFrame {
         background.setBackground(Color.WHITE);
         background.setLayout(null);
 
-
-        edit = new listArea(background,userList,bookList);
+        edit = new listArea(bookList,userList,4);
         edit.setBounds(0,0,860,600);
         //button(edit);
+        background.add(edit);
         add(background);
 
         Button delete = new Button("삭제");
@@ -55,12 +53,13 @@ public class EditUser extends JFrame {
                 if (n == 0) {
                     JOptionPane.showMessageDialog(null, "Check User");
                 } else {
-                    edit.background.removeAll();
-                    edit.bookListArea(background);
+                    edit.removeAll();
+                    edit.bookListArea(4);
                     edit.printUser(userList,bookList);
-                    edit.background.revalidate();
-                    edit.background.repaint();
+                    edit.revalidate();
+                    edit.repaint();
                     edit.setBounds(0,0,860,600);
+
                 }
             }
         });

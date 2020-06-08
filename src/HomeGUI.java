@@ -14,9 +14,12 @@ public class HomeGUI extends JFrame {
     JPanel top;
     listArea home;
     String user;
-
+    int mode;
+    boolean isAdmin;
     public HomeGUI(UserList Userlist, BookList BookList) {
         super("Main");
+        isAdmin = false;
+        mode = 0;
         setSize(1100, 700);
         setBackground(Color.WHITE);
         userList = Userlist;
@@ -28,7 +31,9 @@ public class HomeGUI extends JFrame {
         background = new JPanel();
         background.setBackground(Color.WHITE);
         background.setLayout(null);
-        home = new listArea(background,bookList,userList);
+
+        home = new listArea(bookList,userList,mode);
+        background.add(home);
         basicGUI(background);
         add(background);
         init();
@@ -153,7 +158,10 @@ public class HomeGUI extends JFrame {
         exit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                userList.whoSignin().setOn();
                 dispose();
+                new SignInGUI(userList,bookList)
+;
             }
         });
 
@@ -182,11 +190,10 @@ public class HomeGUI extends JFrame {
     public void searchResult(String search,String selected){
         ArrayList<Book> searchResult = bookList.searchBook(search, selected);
         if(searchResult!=null){
-            home.updatePanel(1);
+            home.updatePanel(2);
             home.printsearchBook(searchResult);
             home.revalidate();
             home.repaint();
-            home.mode = 1;
         }
 
     }

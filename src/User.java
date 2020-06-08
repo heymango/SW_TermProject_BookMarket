@@ -53,13 +53,10 @@ public class User {
         return isActivate;
     }
 
-    public void changeActivateToFalse() {
-        isActivate = false;
+    public void changeActivate() {
+        isActivate =!isActivate;
     }
 
-    public void changeActivateToTrue() {
-        isActivate = true;
-    }
 
     public boolean isOn() {
         return isOn;

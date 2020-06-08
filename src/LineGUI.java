@@ -67,53 +67,38 @@ public class LineGUI extends JPanel {
         String pwd = user.getPassword();
         String mail = user.getEmail();
         String phone = user.getPhone();
-        deactivate = new Button("비활성화");
-        activate = new Button("활성화");
-        activate.setBackground(ui.s);
+
+        activate = new Button();
+
+        add(checkbox);
+        add(init2(name));
+        add(init2(id));
+        add(init2(pwd));
+        add(init2(mail));
+        add(init2(phone));
         if(user.isActivate()) {
-            add(checkbox);
-            add(init2(name));
-            add(init2(id));
-            add(init2(pwd));
-            add(init2(mail));
-            add(init2(phone));
-            add(deactivate);
+            activate.setText("활성화");
+            activate.setBackground(ui.s);
+
         }
         else{
-            add(checkbox);
-            add(init2(name));
-            add(init2(id));
-            add(init2(pwd));
-            add(init2(mail));
-            add(init2(phone));
-            add(activate);
+            activate.setText("비활성화");
+            activate.setBackground(ui.g);
         }
-
-        deactivate.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int i =userList.userArray.indexOf(user);
-                userList.userArray.get(i).changeActivateToFalse();
-
-                update(user,userList,bookList);
-                revalidate();
-                repaint();
-
-
-            }
-        });
+        add(activate);
 
         activate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int i =userList.userArray.indexOf(user);
-                userList.userArray.get(i).changeActivateToTrue();
-                update(user,userList,bookList);
-                revalidate();
-                repaint();
+                userList.userArray.get(i).changeActivate();
+                activate.setText(userList.userArray.get(i).isActivate()?"활성화":"비활성화");
+                activate.setBackground(userList.userArray.get(i).isActivate()?ui.s:ui.g);
 
             }
         });
+
+
         checkbox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -134,7 +119,7 @@ public class LineGUI extends JPanel {
         setLayout(new GridLayout(1,9));
         setVisible(true);
         setBackground(Color.white);
-        System.out.println(index);
+
         JCheckBox checkbox = new JCheckBox("",false);
         checkbox.setBackground(Color.white);
         checkbox.setHorizontalAlignment(0);
@@ -166,7 +151,7 @@ public class LineGUI extends JPanel {
         setLayout(new GridLayout(1,9));
         setVisible(true);
         setBackground(Color.white);
-        System.out.println(index);
+
         JCheckBox checkbox = new JCheckBox("",false);
         checkbox.setBackground(Color.white);
         checkbox.setHorizontalAlignment(0);
@@ -175,9 +160,12 @@ public class LineGUI extends JPanel {
         this.isbn = new JTextField(isbn);
         this.publisher = new JTextField(publisher);
         this.publishyear = new JTextField(publishyear);
+
         this.condition.addItem("Excellent");
         this.condition.addItem("Good");
         this.condition.addItem("Fair");
+        this.condition.setSelectedItem(condition);
+
         this.condition.setBackground(Color.WHITE);
         this.condition.setBounds(120, 270, 100, 25);
         this.condition.setFont(font);
@@ -227,43 +215,6 @@ public class LineGUI extends JPanel {
         field.setFont(font);
         field.setHorizontalAlignment(JLabel.CENTER);
         field.setBorder(BorderFactory.createEmptyBorder());
-
-    }
-    public void update(User user, UserList userList, BookList bookList){
-        removeAll();
-        setLayout(new GridLayout(1,7));
-        setVisible(true);
-        setBackground(Color.white);
-        JCheckBox checkbox = new JCheckBox();
-        checkbox.setBackground(Color.WHITE);
-        String name = user.getUsername();
-        String id = user.getId();
-        String pwd = user.getPassword();
-        String mail = user.getEmail();
-        String phone = user.getPhone();
-        deactivate = new Button("비활성화");
-        activate = new Button("활성화");
-        activate.setBackground(ui.s);
-        if(user.isActivate()) {
-            add(checkbox);
-            add(init2(name));
-            add(init2(id));
-            add(init2(pwd));
-            add(init2(mail));
-            add(init2(phone));
-            add(deactivate);
-        }
-        else{
-            add(checkbox);
-            add(init2(name));
-            add(init2(id));
-            add(init2(pwd));
-            add(init2(mail));
-            add(init2(phone));
-            add(activate);
-        }
-        revalidate();
-        repaint();
 
     }
 

@@ -11,6 +11,7 @@ public class MyBook extends JFrame {
     BookList myBook = new BookList();
     listArea edit;
     HomeGUI  home;
+
     public MyBook(UserList userList, BookList bookList,HomeGUI home){
         super("MyPage");
         this.home = home;
@@ -22,7 +23,8 @@ public class MyBook extends JFrame {
         background.setBackground(Color.WHITE);
         background.setLayout(null);
         myBook.bookArray = bookList.searchBook(userList.whoSignin().getId(),"판매자");
-        edit = new listArea(background,myBook,userList,userList.whoSignin().getId());
+        edit = new listArea(myBook,userList,3);
+        background.add(edit);
         edit.setBounds(0,0,860,600);
         button(edit);
         add(background);
@@ -62,7 +64,7 @@ public class MyBook extends JFrame {
                 }
                 dispose();
                 home.home.updatePanel(0);
-
+                //home.home.mode = 4;
 
             }
         });
@@ -90,7 +92,9 @@ public class MyBook extends JFrame {
                 }
                 else{
                     dispose();
+                    //home.home.mode = 4;
                     home.home.updatePanel(0);
+
 
                 }
             }

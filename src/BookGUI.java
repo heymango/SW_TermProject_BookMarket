@@ -130,7 +130,9 @@ public class BookGUI extends JFrame {
         bookList.bookArray.add(book);
         JOptionPane.showMessageDialog(null, "Add Book!");
         dispose();
+
         homeGUI.home.updatePanel(0);
+
 
     }
 
