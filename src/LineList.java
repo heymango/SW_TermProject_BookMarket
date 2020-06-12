@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LineList {
@@ -10,10 +11,10 @@ public class LineList {
             Book book = bookList.get(i);
             LineGUI bookInfo = new LineGUI(book);
             lineArray.add(bookInfo);
-            bookInfo.setBounds(0, 50 * i, 800, 50);
+            bookInfo.setBounds(0, 50 * i, 1000, 50);
             bookListPanel.add(bookInfo);
         }
-        bookListPanel.setPreferredSize(new Dimension(800,50*i));
+        bookListPanel.setPreferredSize(new Dimension(1000,50*i));
     }
 
     public LineList(ArrayList<Book> bookList, JPanel bookListPanel, String edit){

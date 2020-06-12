@@ -90,12 +90,12 @@ public class SignInGUI extends JFrame {
                 System.out.println("success");
                 user.changeUserState(userid.getText());
                 if(userid.getText().equals("admin")) {
-                    new AdminHomeGUI(user,bookList);
+                    new AdminHomeGUI(user,bookList,1);
                     dispose();
                 }
                 else{
                     if(user.getUser(userid.getText()).isActivate()) {
-                        new HomeGUI(user, bookList);
+                        new HomeGUI(user, bookList,0);
                         dispose();
                     }
                     else{

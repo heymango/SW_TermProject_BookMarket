@@ -5,6 +5,7 @@ public class UI {
     Font font1 = new Font("배달의민족 한나체 Pro", 0, 50);
     Font font2 = new Font("배달의민족 한나체 Pro", 0, 38);
     Font font3 = new Font("배달의민족 한나체 Pro", 0, 16);
+    Font font4 = new Font("나눔스퀘어",0,15);
     Color p = new Color(142, 117, 241);
     Color g = new Color(43, 43, 44);
     Color b = new Color(103, 137, 253);

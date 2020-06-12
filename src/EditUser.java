@@ -9,7 +9,7 @@ public class EditUser extends JFrame {
     UserList userList;
     BookList bookList;
     BookList myBook = new BookList();
-    listArea edit;
+    ListArea edit;
     public EditUser(UserList userList, BookList bookList){
         super("Users");
         this.userList = userList;
@@ -21,7 +21,7 @@ public class EditUser extends JFrame {
         background.setBackground(Color.WHITE);
         background.setLayout(null);
 
-        edit = new listArea(bookList,userList,4);
+        edit = new ListArea(bookList,userList,4);
         edit.setBounds(0,0,860,600);
         //button(edit);
         background.add(edit);
@@ -54,7 +54,7 @@ public class EditUser extends JFrame {
                     JOptionPane.showMessageDialog(null, "Check User");
                 } else {
                     edit.removeAll();
-                    edit.bookListArea(4);
+                    edit.listArea(4);
                     edit.printUser(userList,bookList);
                     edit.revalidate();
                     edit.repaint();

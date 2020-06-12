@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class listArea extends JPanel {
+public class ListArea extends JPanel {
     UI ui = new UI();
     BookList bookList;
     UserList userList;
@@ -24,11 +24,11 @@ public class listArea extends JPanel {
     //mode 3 : edit_book
     //mode 4 : edit_user
 
-    public listArea(BookList bookList, UserList userList, int mode){
+    public ListArea(BookList bookList, UserList userList, int mode){
         this.bookList= bookList;
         this.userList= userList;
         this.mode = mode;
-        bookListArea(mode);
+        listArea(mode);
         if(mode == 0||mode == 1){
             printBook();
         }
@@ -55,20 +55,20 @@ public class listArea extends JPanel {
     }
 
   */  //Mybook용
-    public listArea(BookList bookList, UserList userList,String userid, int mode){
+    public ListArea(BookList bookList, UserList userList,String userid, int mode){
         this.bookList= bookList;
         this.userList= userList;
         mode = 2;
         printeditBook(bookList.bookArray);
-        bookListArea(mode);
+        listArea(mode);
     }
 
 
-    public void bookListArea(int mode) {
+    public void listArea(int mode) {
         //init ui part
         setLayout(null);
         setBackground(Color.white);
-        setBounds(210, 100, 860, 560);
+        setBounds(210, 100, 1060, 560);
 
         //상단 코멘트, border
         if(mode<4) {
@@ -79,7 +79,39 @@ public class listArea extends JPanel {
         }
 
         //button part
-        if(mode <2) {
+
+
+        //mode 0 home
+        if(mode == 0){
+            Button buyBtn = new Button("구매하기");
+            buyBtn.setBounds(860, 470, 150, 60);
+            buyBtn.setFont(ui.font3);
+            buyBtn.setBackground(ui.s);
+            buyBtn.setHorizontalAlignment(0);
+            buyBtn.setForeground(Color.white);
+            add(buyBtn);
+
+            buyBtn.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int n = 0;
+
+                    for (int i = 0; i < lineList.lineArray.size(); i++) {
+                        if (lineList.lineArray.get(i).selected) {
+                            bookList.bookArray.remove(lineList.lineArray.get(i).book);
+                            n++;
+                        }
+                    }
+                    if (n == 0) {
+                        JOptionPane.showMessageDialog(null, "Check Book");
+
+                    } else {
+                        BuyBook buyBook = new BuyBook(lineList, userList);
+                        updatePanel(mode);
+                    }
+
+                    }
+            });
             Button reset = new Button("새로고침");
             reset.setBounds(30, 470, 100, 60);
             add(reset);
@@ -90,45 +122,14 @@ public class listArea extends JPanel {
                     updatePanel(0);
                 }
             });
-        }
-
-        //mode 0 home
-        if(mode == 0){
-            Button buyBtn = new Button("구매하기");
-            buyBtn.setBounds(660, 470, 150, 60);
-            buyBtn.setFont(ui.font3);
-            buyBtn.setBackground(ui.s);
-            buyBtn.setHorizontalAlignment(0);
-            buyBtn.setForeground(Color.white);
-            add(buyBtn);
-
-            buyBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int n = 0;
-
-                    for (int i = 0; i < lineList.lineArray.size(); i++) {
-                        if (lineList.lineArray.get(i).selected) {
-                            bookList.bookArray.remove(lineList.lineArray.get(i).book);
-                            n++;
-                        }
-                    }
-                    if (n == 0) {
-                        JOptionPane.showMessageDialog(null, "Check Book");
-
-                    } else {
-                        BuyBook buyBook = new BuyBook(lineList, userList);
-                        updatePanel(mode);
-                    }
-
-                    }
-            });
 
         }
+
+
         //mode 1 admin home
         else if(mode == 1){
             Button buyBtn = new Button("구매하기");
-            buyBtn.setBounds(660, 470, 150, 60);
+            buyBtn.setBounds(760, 470, 150, 60);
             buyBtn.setFont(ui.font3);
             buyBtn.setBackground(ui.s);
             buyBtn.setHorizontalAlignment(0);
@@ -157,8 +158,20 @@ public class listArea extends JPanel {
                 }
             });
 
+
+            Button reset = new Button("새로고침");
+            reset.setBounds(30, 470, 100, 60);
+            add(reset);
+
+            reset.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updatePanel(1);
+                }
+            });
+
             Button delete = new Button("삭제하기");
-            delete.setBounds(500,470,150,60);
+            delete.setBounds(600,470,150,60);
             delete.setFont(ui.font3);
             delete.setBackground(ui.p4);
             delete.setHorizontalAlignment(0);
@@ -180,7 +193,7 @@ public class listArea extends JPanel {
 
                     } else {
                         JOptionPane.showMessageDialog(null, "삭제 완료");
-                        updatePanel(0);
+                        updatePanel(1);
                     }
 
                 }
@@ -189,7 +202,7 @@ public class listArea extends JPanel {
 
         else if(mode ==2){
             Button buyBtn = new Button("구매하기");
-            buyBtn.setBounds(660, 470, 150, 60);
+            buyBtn.setBounds(760, 470, 150, 60);
             buyBtn.setFont(ui.font3);
             buyBtn.setBackground(ui.s);
             buyBtn.setHorizontalAlignment(0);
@@ -219,7 +232,7 @@ public class listArea extends JPanel {
             });
 
             Button gotolist = new Button("목록으로");
-            gotolist.setBounds(500,470,150,60);
+            gotolist.setBounds(600,470,150,60);
             gotolist.setFont(ui.font3);
             gotolist.setBackground(ui.p4);
             gotolist.setHorizontalAlignment(0);
@@ -234,74 +247,8 @@ public class listArea extends JPanel {
             });
 
         }
-/*
-        else if(mode ==3){
-            Button editBtn = new Button("수정하기");
-            editBtn.setBounds(660, 470, 150, 60);
-            editBtn.setFont(ui.font3);
-            editBtn.setBackground(ui.s);
-            editBtn.setHorizontalAlignment(0);
-            editBtn.setForeground(Color.white);
-            add(editBtn);
-            editBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    for(int i =0; i<lineMy.lineArray.size(); i++){
-                        String title = lineMy.lineArray.get(i).title.getText();
-                        String isbn= lineMy.lineArray.get(i).isbn.getText();
-                        String author= lineMy.lineArray.get(i).author.getText();
-                        String publisher = lineMy.lineArray.get(i).publisher.getText();
-                        String year = lineMy.lineArray.get(i).publishyear.getText();
-                        String condition = lineMy.lineArray.get(i).condition.getSelectedItem().toString();
-                        String owner = lineMy.lineArray.get(i).owner.getText();
-                        Book book = new Book(title,isbn,author,publisher,year,condition,owner);
-                        int index = bookList.bookArray.indexOf(lineMy.lineArray.get(i).book);
-                        bookList.bookArray.set(index,book);
-
-                    }
-                    //updatePanel(mode);
-                    //home.home.mode = 4;
-
-                }
-            });
-
-            Button deleteBtn = new Button("삭제하기");
-            deleteBtn.setBounds(480, 470, 150, 60);
-            deleteBtn.setFont(ui.font3);
-            deleteBtn.setBackground(ui.s);
-            deleteBtn.setHorizontalAlignment(0);
-            deleteBtn.setForeground(Color.white);
-            add(deleteBtn);
-            deleteBtn.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    int n = 0;
-                    for (int i = 0; i < lineMy.lineArray.size(); i++) {
-                        if (lineMy.lineArray.get(i).selected) {
-                            bookList.bookArray.remove(lineMy.lineArray.get(i).book);
-                            n++;
-                        }
-                    }
-                    if (n == 0) {
-                        JOptionPane.showMessageDialog(null, "Check Book");
-
-                    }
-                    else{
-
-                        //home.home.mode = 4;
-                        //updatePanel(0);
 
 
-                    }
-                }
-            });
-            add(deleteBtn);
-            add(editBtn);
-
-
-        }
-
-*/
 
         //set booklist index
         if(mode ==4) {
@@ -313,8 +260,8 @@ public class listArea extends JPanel {
 
         }
         else{
-            LineGUI bookIndex = new LineGUI();
-            bookIndex.setBounds(7, 30, 800, 50);
+            LineGUI bookIndex = new LineGUI("book");
+            bookIndex.setBounds(7, 30, 1000, 50);
             bookIndex.setBackground(ui.p);
 
             add(bookIndex);
@@ -337,7 +284,7 @@ public class listArea extends JPanel {
 
         lineList = new LineList(bookList.bookArray, bookListPanel);
 
-        sc.setBounds(7, 80, 820, 380);
+        sc.setBounds(7, 80, 1020, 380);
         sc.setViewportView(bookListPanel);
         add(sc);
     }
@@ -353,26 +300,9 @@ public class listArea extends JPanel {
         sc.getVerticalScrollBar().setBackground(Color.WHITE);
         sc.setBorder(BorderFactory.createEmptyBorder());
         lineSearch = new LineList(bookArray, bookListPanel);
-        sc.setBounds(7, 80, 820, 380);
+        sc.setBounds(7, 80, 1020, 380);
         sc.setViewportView(bookListPanel);
         add(sc);
-
-        Button gotolist = new Button("목록으로");
-        gotolist.setBounds(500,470,150,60);
-        gotolist.setFont(ui.font3);
-        gotolist.setBackground(ui.p4);
-        gotolist.setHorizontalAlignment(0);
-        gotolist.setForeground(Color.white);
-
-        add(gotolist);
-        gotolist.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                updatePanel(0);
-            }
-        });
-
-
     }
 
     public void printeditBook(ArrayList<Book> bookArray){
@@ -413,7 +343,7 @@ public class listArea extends JPanel {
 
     public void updatePanel(int mode){
         removeAll();
-        bookListArea(mode);
+        listArea(mode);
 
         if(mode == 0||mode == 1){
             printBook();

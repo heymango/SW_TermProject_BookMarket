@@ -1,3 +1,5 @@
+import com.google.gson.JsonObject;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,13 +9,22 @@ public class BookGUI extends JFrame {
     UserList userList;
     BookList bookList;
     HomeGUI homeGUI;
+    BookGUI bookGUI;
+    JsonObject object = null;
+    JTextField title;
+    JTextField ISBN;
+    JTextField author;
+    JTextField publisher;
+    JTextField year;
+
+
     private Boolean checkId = false;
-    public BookGUI(UserList UserList, BookList BookList, HomeGUI homeGUI){
+    public BookGUI(UserList UserList, BookList BookList){
         super("AddBook");
         setSize(450, 450);
         userList = UserList;
         bookList = BookList;
-        this.homeGUI = homeGUI;
+        bookGUI = this;
         setLayout(new BorderLayout());
         JPanel panel = new JPanel();
         BookPanel(panel);
@@ -34,9 +45,13 @@ public class BookGUI extends JFrame {
         panel.setBackground(Color.WHITE);
 
         JLabel BookText = new JLabel("Book Info");
-        BookText.setBounds(10, 10, 500, 30);
+        BookText.setBounds(10, 10, 200, 30);
         BookText.setFont(font1);
         panel.add(BookText);
+
+        Button searchBook = new Button("책 정보 검색하기");
+        searchBook.setBounds(230,10,150,30);
+        panel.add(searchBook);
 
         JLabel TitleText = new JLabel("Title");
         TitleText.setForeground(new Color(51,51,51));
@@ -44,8 +59,8 @@ public class BookGUI extends JFrame {
         TitleText.setFont(font2);
         panel.add(TitleText);
 
-        JTextField title = new JTextField(20);
-        title.setBounds(120, 70, 160, 25);
+        title = new JTextField(20);
+        title.setBounds(160, 70, 160, 25);
         panel.add(title);
 
 
@@ -55,18 +70,18 @@ public class BookGUI extends JFrame {
         ISBNText.setFont(font2);
         panel.add(ISBNText);
 
-        JTextField ISBN = new JTextField(20);
-        ISBN.setBounds(120, 110, 160, 25);
+        ISBN = new JTextField(20);
+        ISBN.setBounds(160, 110, 160, 25);
         panel.add(ISBN);
 
-        JLabel yearText = new JLabel("Publication"+"\n"+"year");
+        JLabel yearText = new JLabel("Publication year");
         yearText.setForeground(new Color(51,51,51));
-        yearText.setBounds(10, 150, 100, 25);
+        yearText.setBounds(10, 150, 130, 25);
         yearText.setFont(font2);
         panel.add(yearText);
 
-        JTextField year = new JTextField(20);
-        year.setBounds(120, 150, 160, 25);
+        year = new JTextField(20);
+        year.setBounds(160, 150, 160, 25);
         panel.add(year);
 
         JLabel publisherText = new JLabel("Publisher");
@@ -75,8 +90,8 @@ public class BookGUI extends JFrame {
         publisherText.setFont(font2);
         panel.add(publisherText);
 
-        JTextField publisher = new JTextField(20);
-        publisher.setBounds(120, 190, 160, 25);
+        publisher = new JTextField(20);
+        publisher.setBounds(160, 190, 160, 25);
         panel.add(publisher);
 
         JLabel authorText = new JLabel("Author");
@@ -85,8 +100,8 @@ public class BookGUI extends JFrame {
         authorText.setFont(font2);
         panel.add(authorText);
 
-        JTextField author = new JTextField(20);
-        author.setBounds(120, 230, 160, 25);
+        author = new JTextField(20);
+        author.setBounds(160, 230, 160, 25);
         panel.add(author);
 
         //phone number
@@ -100,7 +115,7 @@ public class BookGUI extends JFrame {
         condition.addItem("Excellent");
         condition.addItem("Good");
         condition.addItem("Fair");
-        condition.setBounds(120, 270, 100, 25);
+        condition.setBounds(160, 270, 100, 25);
         condition.setFont(font2);
         panel.add(condition);
 
@@ -118,6 +133,13 @@ public class BookGUI extends JFrame {
             }
         });
 
+        searchBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new APIBookSearch(bookGUI);
+            }
+        });
+
 
     }
     public void checkBook(String Title, String Author, String ISBN,String Publisher, String Year, String Condition){
@@ -128,12 +150,11 @@ public class BookGUI extends JFrame {
 
         Book book = new Book(Title,ISBN,Author,Publisher,Year,Condition,userList.whoSignin().getId());
         bookList.bookArray.add(book);
+        book.setBookInfo(object);
         JOptionPane.showMessageDialog(null, "Add Book!");
         dispose();
 
-        homeGUI.home.updatePanel(0);
-
-
     }
+
 
 }

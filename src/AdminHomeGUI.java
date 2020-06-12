@@ -1,3 +1,5 @@
+import com.sun.source.tree.WhileLoopTree;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,53 +9,10 @@ public class AdminHomeGUI extends HomeGUI {
     Button admin;
     AdminHomeGUI homeGUI;
 
-    public AdminHomeGUI(UserList Userlist, BookList BookList) {
-        super(Userlist, BookList);
+    public AdminHomeGUI(UserList Userlist, BookList BookList, int mode) {
+        super(Userlist, BookList,mode);
         isAdmin = true;
-        mode = 1;
-        admin = new Button("관리자");
-        admin.setBounds(935,10,100,30);
-        super.top.add(admin);
         homeGUI = this;
-        Button delete = new Button("삭제하기");
-        delete.setBounds(500,470,150,60);
-        delete.setFont(ui.font3);
-        delete.setBackground(ui.p4);
-        delete.setHorizontalAlignment(0);
-        delete.setForeground(Color.white);
-        home.add(delete);
-        //home.mode = 4;
-        /*
-        delete.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                int n = 0;
-
-                for (int i = 0; i < home.lineList.lineArray.size(); i++) {
-                    if (home.lineList.lineArray.get(i).selected) {
-                        bookList.bookArray.remove(home.lineList.lineArray.get(i).book);
-                        n++;
-                    }
-                }
-                if (n == 0) {
-                    JOptionPane.showMessageDialog(null, "Check Book");
-
-                } else {
-                    JOptionPane.showMessageDialog(null, "삭제 완료");
-                    home.updatePanel(0);
-                }
-
-            }
-        });
-*/
-
-        admin.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                new EditUser(userList,bookList);
-            }
-        });
     }
 
 
@@ -63,13 +22,15 @@ public class AdminHomeGUI extends HomeGUI {
         menu.setBackground(ui.p);
         menu.setBounds(10, 107, 200, 550);
 
-        Button addBook = new Button("<html>나의 책<br>등록하기<br></html>");
-        addBook.setFont(ui.font2);
-        addBook.setBackground(ui.p2);
-        addBook.setBounds(0, 0, 200, 183);
-        menu.add(addBook);
 
-        Button editBook = new Button("<html>나의 책<br>관리하기<br></html>");
+        JLabel adminMode = new JLabel("<관리자모드>");
+        adminMode.setFont(ui.font2);
+        adminMode.setBounds(0, 0, 200, 183);
+        adminMode.setForeground(Color.WHITE);
+        adminMode.setHorizontalAlignment(0);
+        menu.add(adminMode);
+
+        Button editBook = new Button("회원관리");
         editBook.setFont(ui.font2);
         editBook.setBackground(ui.p3);
         editBook.setBounds(0, 183, 200, 183);
@@ -81,18 +42,12 @@ public class AdminHomeGUI extends HomeGUI {
         exit.setBounds(0, 366, 200, 184);
         menu.add(exit);
 
-        addBook.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new BookGUI(userList,bookList,homeGUI);
-            }
-        });
 
         editBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new MyBook(userList,bookList,homeGUI);
 
+                new EditUser(userList,bookList);
             }
         });
 

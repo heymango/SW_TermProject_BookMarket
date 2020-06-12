@@ -9,7 +9,7 @@ public class MyBook extends JFrame {
     UserList userList;
     BookList bookList;
     BookList myBook = new BookList();
-    listArea edit;
+    ListArea edit;
     HomeGUI  home;
 
     public MyBook(UserList userList, BookList bookList,HomeGUI home){
@@ -23,10 +23,25 @@ public class MyBook extends JFrame {
         background.setBackground(Color.WHITE);
         background.setLayout(null);
         myBook.bookArray = bookList.searchBook(userList.whoSignin().getId(),"판매자");
-        edit = new listArea(myBook,userList,3);
+        edit = new ListArea(myBook,userList,3);
         background.add(edit);
         edit.setBounds(0,0,860,600);
         button(edit);
+        add(background);
+    }
+
+    public MyBook(User user, BookList bookList){
+        super("User's Book");
+        this.bookList = bookList;
+        setSize(880,640);
+        init();
+        JPanel background = new JPanel();
+        background.setBackground(Color.WHITE);
+        background.setLayout(null);
+        myBook.bookArray = bookList.searchBook(user.getId(),"판매자");
+        edit = new ListArea(myBook,userList,3);
+        background.add(edit);
+        edit.setBounds(0,0,860,600);
         add(background);
     }
 
@@ -38,7 +53,7 @@ public class MyBook extends JFrame {
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public void button(listArea edit){
+    public void button(ListArea edit){
         Button editBtn = new Button("수정하기");
         editBtn.setBounds(660, 470, 150, 60);
         editBtn.setFont(ui.font3);

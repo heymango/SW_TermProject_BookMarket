@@ -1,6 +1,10 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -13,51 +17,52 @@ public class LineGUI extends JPanel {
     User user;
     int index;
     UI ui = new UI();
-    Button deactivate;
     Button activate;
+    Button userBook;
     Font font = new Font("배달의민족 한나체 Pro",0,17);
     JLabel checkbox;
     JTextField title, isbn, author, publisher, publishyear;
     JComboBox<String> condition = new JComboBox<String>();
     JLabel owner;
-    public LineGUI(){
-        setLayout(new GridLayout(1,9));
-        setVisible(true);
-        setBackground(Color.white);
-        checkbox = new JLabel("");
 
-        add(checkbox);
-        add(init("제목"));
-        add(init("ISBN"));
-        add(init("저자"));
-        add(init("출판사"));
-        add(init("출판년도"));
-        add(init("상태"));
-        add(init("판매자"));
+    public LineGUI(String type){
+        if(type.equals("book")) {
+            setLayout(new GridLayout(1, 10));
+            setVisible(true);
+            setBackground(Color.white);
+            checkbox = new JLabel("");
+            add(checkbox);
+            add(init("제목"));
+            add(init("ISBN"));
+            add(init("저자"));
+            add(init("출판사"));
+            add(init("출판년도"));
+            add(init("상태"));
+            add(init("판매자"));
+            add(init("상세정보"));
+        }
+        else if(type.equals("user")){
+            setLayout(new GridLayout(1,8));
+            setVisible(true);
+            setBackground(Color.white);
+            checkbox = new JLabel("");
 
+            add(checkbox);
+            add(init("이름"));
+            add(init("아이디"));
+            add(init("비밀번호"));
+            add(init("메일"));
+            add(init("전화번호"));
+            add(init("상태"));
+            add(init("책"));
+        }
     }
 
-    public LineGUI(String user){
-        setLayout(new GridLayout(1,7));
-        setVisible(true);
-        setBackground(Color.white);
-        checkbox = new JLabel("");
 
-        add(checkbox);
-        add(init("이름"));
-        add(init("아이디"));
-        add(init("비밀번호"));
-        add(init("메일"));
-        add(init("전화번호"));
-        add(init("상태"));
-
-    }
 
     public LineGUI(User user, UserList userList, BookList bookList){
-        removeAll();
-
         this.user = user;
-        setLayout(new GridLayout(1,7));
+        setLayout(new GridLayout(1,8));
         setVisible(true);
         setBackground(Color.white);
         JCheckBox checkbox = new JCheckBox();
@@ -69,13 +74,14 @@ public class LineGUI extends JPanel {
         String phone = user.getPhone();
 
         activate = new Button();
-
+        userBook = new Button("등록한 책");
         add(checkbox);
         add(init2(name));
         add(init2(id));
         add(init2(pwd));
         add(init2(mail));
         add(init2(phone));
+
         if(user.isActivate()) {
             activate.setText("활성화");
             activate.setBackground(ui.s);
@@ -86,7 +92,13 @@ public class LineGUI extends JPanel {
             activate.setBackground(ui.g);
         }
         add(activate);
-
+        add(userBook);
+        userBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new MyBook(user,bookList);
+            }
+        });
         activate.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -116,7 +128,7 @@ public class LineGUI extends JPanel {
         String publishyear = book.getPublishYear();
         String condition = book.getCondition();
         String owner= book.getUser();
-        setLayout(new GridLayout(1,9));
+        setLayout(new GridLayout(1,10));
         setVisible(true);
         setBackground(Color.white);
 
@@ -124,6 +136,8 @@ public class LineGUI extends JPanel {
         checkbox.setBackground(Color.white);
         checkbox.setHorizontalAlignment(0);
         add(checkbox);
+
+        Button info = new Button("상세정보");
         add(init2(title));
         add(init2(isbn));
         add(init2(author));
@@ -131,13 +145,24 @@ public class LineGUI extends JPanel {
         add(init2(publishyear));
         add(init2(condition));
         add(init2(owner));
+        add(info);
         checkbox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 selected = !selected;
             }
         });
+
+        info.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(book.getBookInfo()!=null){
+                    new BookInfo(book);
+                }
+            }
+        });
     }
+
 
     public LineGUI(Book book,String edit){
         this.book = book;

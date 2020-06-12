@@ -1,3 +1,5 @@
+import com.google.gson.JsonObject;
+
 public class Book {
     private String title;
     private String ISBN;
@@ -6,6 +8,7 @@ public class Book {
     private String publishYear;
     private String condition;
     private final String user;
+    private JsonObject bookInfo = null;
     private int index;
    // String[] cond = {"Excellent", "Good", "Fair"};
     public Book(String Title, String isbn, String Author, String Publisher, String PublishYear, String Condition, String User){
@@ -16,6 +19,14 @@ public class Book {
         publishYear = PublishYear;
         condition = Condition;
         user = User;
+    }
+
+    public void setBookInfo(JsonObject bookInfo) {
+        this.bookInfo = bookInfo;
+    }
+
+    public JsonObject getBookInfo() {
+        return bookInfo;
     }
 
     public String getCondition() {
