@@ -267,10 +267,12 @@ public class APIBookSearch extends JFrame {
 
         String clientId = "v52j4T22yo2wytf7XVU9";
         String clientSecret = "CbVNOBbeBo";
+        //네이버 API 인증키
 
-        String query = null;
+
+        String query = null; //검색어 QUERY
         try {
-            query = URLEncoder.encode(search,"UTF-8");
+            query = URLEncoder.encode(search,"UTF-8"); //한국어 인코딩
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
@@ -278,25 +280,25 @@ public class APIBookSearch extends JFrame {
         URL url = null;
 
         try {
-            url = new URL("https://openapi.naver.com/v1/search/book_adv.json?"+type+"="+query+"&display=50");
+            url = new URL("https://openapi.naver.com/v1/search/book_adv.json?"+type+"="+query+"&display=50"); //검색타입설정, 검색어 쿼리 추가, 50개 검색
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
         URLConnection urlConn= null;
         try {
-            urlConn = url.openConnection();
+            urlConn = url.openConnection(); //URL CONNECT
         } catch (IOException e) {
             e.printStackTrace();
         }
         JsonParser json = new JsonParser();
 
-        urlConn.setRequestProperty("X-Naver-Client-ID", clientId);
+        urlConn.setRequestProperty("X-Naver-Client-ID", clientId);  //인증키 보내기
         urlConn.setRequestProperty("X-Naver-Client-Secret", clientSecret);
 
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new InputStreamReader(urlConn.getInputStream()));
+            br = new BufferedReader(new InputStreamReader(urlConn.getInputStream())); //응답
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -307,17 +309,17 @@ public class APIBookSearch extends JFrame {
         while(true)
         {
             try {
-                if ((msg = br.readLine()) == null) break;
+                if ((msg = br.readLine()) == null) break;  //응답 받기
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            b.append(msg);
+            b.append(msg); //응답을 합쳐서
         }
 
         String result = b.toString();
         JsonParser Parser = new JsonParser();
-        JsonObject jsonObj = (JsonObject) Parser.parse(result);
-        JsonArray memberArray = (JsonArray) jsonObj.get("items");
+        JsonObject jsonObj = (JsonObject) Parser.parse(result); //Jsonobject로 변환
+        JsonArray memberArray = (JsonArray) jsonObj.get("items");//필요한 값만 저장
         return memberArray;
     }
 

@@ -3,6 +3,8 @@ import javax.swing.plaf.basic.BasicBorders;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class HomeGUI extends JFrame {
@@ -35,6 +37,14 @@ public class HomeGUI extends JFrame {
         basicGUI(background);
         add(background);
         init();
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                new SaveToFile(userList, bookList, "User.txt","Book.txt");
+                System.out.println("!!!!!!!!!!!!!!!!!");
+            }
+        });
 
     }
 
@@ -159,7 +169,7 @@ public class HomeGUI extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 userList.whoSignin().setOn();
                 dispose();
-                new SaveToFile(userList, bookList,"User.csv","Book.csv");
+                new SaveToFile(userList, bookList,"User.txt","Book.txt");
                 new SignInGUI(userList,bookList)
 ;
             }

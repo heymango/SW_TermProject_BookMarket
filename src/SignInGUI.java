@@ -2,18 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 public class SignInGUI extends JFrame {
     UI ui = new UI();
     private JTextField userid;
     private JPasswordField userpwd;
-    UserList user;
+    UserList userList;
     BookList bookList;
 
     public SignInGUI(UserList User, BookList BookList) {
         super("Sign In");
-        user = User;
+        userList = User;
         bookList = BookList;
         setSize(300, 160);
         init();
@@ -23,6 +25,13 @@ public class SignInGUI extends JFrame {
         add(panel, BorderLayout.CENTER);
         setFont(ui.font3);
         setVisible(true);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                new SaveToFile(userList, bookList, "User.txt","Book.txt");
+                System.out.println("!!!!!!!!!!!!!!!!!");
+            }
+        });
     }
 
     public void init() {
@@ -73,7 +82,7 @@ public class SignInGUI extends JFrame {
         signupbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SignUpGUI(user, bookList);
+                new SignUpGUI(userList, bookList);
                 dispose();
             }
         });
@@ -85,16 +94,16 @@ public class SignInGUI extends JFrame {
         System.out.println(p);
         if (userid.getText().equals("") || p.equals("")) {
             JOptionPane.showMessageDialog(null, "Enter the User ID and Password");
-        } else if (user.isUserThere(userid.getText())) {
-            if (p.equals(user.userPwd(userid.getText()))) {
+        } else if (userList.isUserThere(userid.getText())) {
+            if (p.equals(userList.userPwd(userid.getText()))) {
                 System.out.println("success");
-                user.changeUserState(userid.getText());
+                userList.changeUserState(userid.getText());
                 if (userid.getText().equals("admin")) {
-                    new AdminHomeGUI(user, bookList, 1);
+                    new AdminHomeGUI(userList, bookList, 1);
                     dispose();
                 } else {
-                    if (user.getUser(userid.getText()).isActivate()) {
-                        new HomeGUI(user, bookList, 0);
+                    if (userList.getUser(userid.getText()).isActivate()) {
+                        new HomeGUI(userList, bookList, 0);
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Deactivated user");

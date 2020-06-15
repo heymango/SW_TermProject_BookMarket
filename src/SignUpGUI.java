@@ -1,9 +1,8 @@
+import jdk.swing.interop.SwingInterOpUtils;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class SignUpGUI extends JFrame {
     UI ui = new UI();
@@ -21,6 +20,13 @@ public class SignUpGUI extends JFrame {
         JPanel panel = new JPanel();
         signUpPanel(panel);
         add(panel, BorderLayout.CENTER);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e){
+                new SaveToFile(userList, bookList, "User.txt","Book.txt");
+                System.out.println("!!!!!!!!!!!!!!!!!");
+            }
+        });
 
     }
     public void init(){

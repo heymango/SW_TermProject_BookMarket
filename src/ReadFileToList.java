@@ -9,17 +9,15 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 
 public class ReadFileToList {
-    UserList userList;
-    BookList bookList;
-    String Book;
-    String User;
-    public ReadFileToList(UserList UserList, BookList BookList, String UserFileName, String BookFileNme){
-        User = UserFileName;
-        Book = BookFileNme;
-        bookList = BookList;
-        userList = UserList;
+    UserList userList = new UserList();
+    BookList bookList = new BookList();
+    String Book = "Book.txt";
+    String User = "User.txt";
+    public ReadFileToList(){
         readBook();
         readUser();
+        SignInGUI gui = new SignInGUI(userList,bookList);
+
 
     }
 
