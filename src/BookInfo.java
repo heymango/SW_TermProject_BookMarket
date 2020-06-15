@@ -24,14 +24,14 @@ public class BookInfo extends JFrame {
         add(background);
     }
 
-    public void printline(JPanel line, JsonObject object){
+    public void printline(JPanel line, List object){
         URL url = null;
         Image image =null;
 
-        String u = object.get("image").getAsString();
+        String u = object.getItem(2);
         if(u !=null&&!u.equals("")) {
             try {
-                url = new URL(object.get("image").getAsString());
+                url = new URL(u);
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             }
@@ -55,7 +55,7 @@ public class BookInfo extends JFrame {
         }
 
 
-        String t ="<html>"+object.get("title").getAsString()+"</html>";
+        String t ="<html>"+object.getItem(0)+"</html>";
         JLabel title = new JLabel(t);
         title.setVerticalAlignment(SwingConstants.NORTH);
         title.setFont(ui.font);
@@ -63,14 +63,14 @@ public class BookInfo extends JFrame {
         title.setBackground(ui.p4);
         line.add(title);
 
-        String info ="<html>"+object.get("author").getAsString()+" 지음 | "+object.get("publisher").getAsString()+" 출판 | "+object.get("pubdate").getAsString()+"</html>";
+        String info ="<html>"+object.getItem(3)+" 지음 | "+object.getItem(4)+" 출판 | "+object.getItem(5)+"</html>";
         JLabel infoL = new JLabel(info);
         infoL.setFont(ui.font4);
         infoL.setBounds(100,55,750,20);
         infoL.setForeground(ui.p4);
         line.add(infoL);
 
-        String isbn13 = isbn13(object.get("isbn").getAsString());
+        String isbn13 = object.getItem(6);
 
         JLabel ISBN = new JLabel("ISBN : "+isbn13);
         ISBN.setFont(ui.font4);
@@ -78,7 +78,7 @@ public class BookInfo extends JFrame {
         ISBN.setForeground(ui.p4);
         line.add(ISBN);
 
-        String description = "<html>"+object.get("description").getAsString()+"</html>";
+        String description = "<html>"+object.getItem(7)+"</html>";
         JLabel des = new JLabel(description);
         des.setForeground(ui.g);
         des.setFont(ui.font4);
@@ -96,7 +96,7 @@ public class BookInfo extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Desktop.getDesktop().browse(new URI(object.get("link").getAsString()));
+                    Desktop.getDesktop().browse(new URI(object.getItem(1)));
                 }
                 catch (IOException | URISyntaxException err) { err.printStackTrace(); }
 

@@ -1,5 +1,8 @@
 import com.google.gson.JsonObject;
 
+import java.awt.*;
+
+
 public class Book {
     private String title;
     private String ISBN;
@@ -8,7 +11,7 @@ public class Book {
     private String publishYear;
     private String condition;
     private final String user;
-    private JsonObject bookInfo = null;
+    private List bookInfo = null;
     private int index;
    // String[] cond = {"Excellent", "Good", "Fair"};
     public Book(String Title, String isbn, String Author, String Publisher, String PublishYear, String Condition, String User){
@@ -21,11 +24,11 @@ public class Book {
         user = User;
     }
 
-    public void setBookInfo(JsonObject bookInfo) {
+    public void setBookInfo(List bookInfo) {
         this.bookInfo = bookInfo;
     }
 
-    public JsonObject getBookInfo() {
+    public List getBookInfo() {
         return bookInfo;
     }
 

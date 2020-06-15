@@ -60,7 +60,24 @@ public class SaveToFile {
                 bufWriter.write(book.getCondition());
                 bufWriter.write(",");
                 bufWriter.write(book.getUser());
-                bufWriter.newLine();
+                if(book.getBookInfo()!=null) {
+                    bufWriter.write(book.getBookInfo().getItem(0));
+                    bufWriter.write(",");
+                    bufWriter.write(book.getBookInfo().getItem(1));
+                    bufWriter.write(",");
+                    bufWriter.write(book.getBookInfo().getItem(2));
+                    bufWriter.write(",");
+                    bufWriter.write(book.getBookInfo().getItem(3));
+                    bufWriter.write(",");
+                    bufWriter.write(book.getBookInfo().getItem(4));
+                    bufWriter.write(",");
+                    bufWriter.write(book.getBookInfo().getItem(5));
+                    bufWriter.write(",");
+                    bufWriter.write(book.getBookInfo().getItem(6));
+                    bufWriter.write(",");
+                    bufWriter.write(book.getBookInfo().getItem(7));
+                    bufWriter.newLine();
+                }
             }
         } catch(IOException e){
             e.printStackTrace();

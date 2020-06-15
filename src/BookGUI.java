@@ -10,7 +10,7 @@ public class BookGUI extends JFrame {
     BookList bookList;
     HomeGUI homeGUI;
     BookGUI bookGUI;
-    JsonObject object = null;
+    List info = null;
     JTextField title;
     JTextField ISBN;
     JTextField author;
@@ -150,7 +150,7 @@ public class BookGUI extends JFrame {
 
         Book book = new Book(Title,ISBN,Author,Publisher,Year,Condition,userList.whoSignin().getId());
         bookList.bookArray.add(book);
-        book.setBookInfo(object);
+        book.setBookInfo(info);
         JOptionPane.showMessageDialog(null, "Add Book!");
         dispose();
 

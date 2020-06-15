@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -59,7 +60,19 @@ public class ReadFileToList {
             line = br2.readLine();
             while((line = br2.readLine()) != null){
                 String [] array =line.split(",");
-                bookList.addBook(new Book(array[0],array[1],array[2],array[3],array[4],array[5],array[6]));
+                Book book = new Book(array[0],array[1],array[2],array[3],array[4],array[5],array[6]);
+                if(array.length>7) {
+                    List info = new List();
+                    info.add(array[7]);
+                    info.add(array[8]);
+                    info.add(array[9]);
+                    info.add(array[10]);
+                    info.add(array[11]);
+                    info.add(array[12]);
+                    info.add(array[13]);
+                    book.setBookInfo(info);
+                }
+                bookList.addBook(book);
             }
         } catch(IOException e){
             e.printStackTrace();

@@ -118,9 +118,21 @@ public class APIBookSearch extends JFrame {
         Image image =null;
 
         String u = object.get("image").getAsString();
+        System.out.println(u);
         try {
-            url = new URL(object.get("image").getAsString());
+            url = new URL(u);
+            image = ImageIO.read(url);
+            JLabel img = new JLabel(new ImageIcon(image));
+            line.add(img);
+            img.setBounds(0, 0, 90, 130);
+
         } catch (MalformedURLException e) {
+            JLabel img = new JLabel("No Image");
+            line.add(img);
+            img.setBounds(0,0,90,130);
+            img.setFont(ui.font);
+            img.setForeground(ui.p4);
+        } catch (IOException e) {
             e.printStackTrace();
             JLabel img = new JLabel("No Image");
             line.add(img);
@@ -128,26 +140,6 @@ public class APIBookSearch extends JFrame {
             img.setFont(ui.font);
             img.setForeground(ui.p4);
         }
-
-        try {
-            image = ImageIO.read(url);
-            JLabel img = new JLabel(new ImageIcon(image));
-            line.add(img);
-            img.setBounds(0,0,90,130);
-
-        } catch (IOException e) {
-           // e.printStackTrace();
-            JLabel img = new JLabel("No Image");
-            line.add(img);
-            img.setBounds(0,0,90,130);
-            img.setFont(ui.font);
-            img.setForeground(ui.p4);
-        }
-
-
-
-
-
 
 
         String t ="<html>"+object.get("title").getAsString()+"</html>";
@@ -220,19 +212,34 @@ public class APIBookSearch extends JFrame {
         String publishyear = object.get("pubdate").getAsString();
         String year = publishyear.substring(0,4);
         String isbn = isbn13(object.get("isbn").getAsString());
-
+        String link = object.get("link").getAsString();
+        String description = object.get("description").getAsString();
+        String image = object.get("image").getAsString();
 
         bookGUI.title.setText(title);
         bookGUI.author.setText(author);
         bookGUI.ISBN.setText(isbn);
         bookGUI.publisher.setText(publisher);
         bookGUI.year.setText(year);
-        bookGUI.object = object;
+
+        List bookInfo = new List();
+        bookInfo.add(title);
+        bookInfo.add(link);
+        bookInfo.add(image);
+        bookInfo.add(author);
+        bookInfo.add(publisher);
+        bookInfo.add(year);
+        bookInfo.add(isbn);
+        bookInfo.add(description);
+
+        bookGUI.info = bookInfo;
+
+
         dispose();
     }
 
     public String isbn13(String isbn){
-        if(isbn.length()>10) {
+        if(isbn.length()>10&&isbn.length()!=13) {
             String[] parse = isbn.split(" ");
             isbn = parse[1];
         }
@@ -242,7 +249,7 @@ public class APIBookSearch extends JFrame {
 
 
 
-    public void init() {
+    public void init(){
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
