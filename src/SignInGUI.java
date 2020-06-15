@@ -5,26 +5,27 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class SignInGUI extends JFrame {
-        private JTextField userid;
-        private JPasswordField userpwd;
-        Font font = new Font("배달의민족 을지로체 TTF",0,13);
-        UserList user;
-        BookList bookList;
-        public SignInGUI(UserList User, BookList BookList){
-            super("Sign In");
-            user = User;
-            bookList = BookList;
-            setSize(300,160);
-            init();
-            setLayout(new BorderLayout());
-            JPanel panel = new JPanel();
-            loginPanel(panel);
-            add(panel,BorderLayout.CENTER);
-            setFont(font);
-            setVisible(true);
-        }
+    UI ui = new UI();
+    private JTextField userid;
+    private JPasswordField userpwd;
+    UserList user;
+    BookList bookList;
 
-    public void init(){
+    public SignInGUI(UserList User, BookList BookList) {
+        super("Sign In");
+        user = User;
+        bookList = BookList;
+        setSize(300, 160);
+        init();
+        setLayout(new BorderLayout());
+        JPanel panel = new JPanel();
+        loginPanel(panel);
+        add(panel, BorderLayout.CENTER);
+        setFont(ui.font3);
+        setVisible(true);
+    }
+
+    public void init() {
         setLocationRelativeTo(null);
         setVisible(true);
         setResizable(false);
@@ -32,20 +33,19 @@ public class SignInGUI extends JFrame {
     }
 
 
-
     public void loginPanel(JPanel panel) {
         panel.setLayout(null);
         panel.setBackground(Color.WHITE);
         JLabel userLabel = new JLabel("User ID");
-        userLabel.setForeground(new Color(51,51,51));
+        userLabel.setForeground(new Color(51, 51, 51));
         userLabel.setBounds(10, 10, 80, 25);
-        userLabel.setFont(font);
+        userLabel.setFont(ui.font3);
         panel.add(userLabel);
 
         JLabel passLabel = new JLabel("Password");
-        passLabel.setForeground(new Color(51,51,51));
+        passLabel.setForeground(new Color(51, 51, 51));
         passLabel.setBounds(10, 40, 80, 25);
-        passLabel.setFont(font);
+        passLabel.setFont(ui.font3);
         panel.add(passLabel);
 
         userid = new JTextField(20);
@@ -73,44 +73,39 @@ public class SignInGUI extends JFrame {
         signupbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                new SignUpGUI(user,bookList);
+                new SignUpGUI(user, bookList);
                 dispose();
             }
         });
     }
 
-    public void checkSignIn(){
-            String p = String.valueOf(userpwd.getPassword());
+    public void checkSignIn() {
+
+        String p = String.valueOf(userpwd.getPassword());
         System.out.println(p);
-        if(userid.getText().equals("")||p.equals("")){
+        if (userid.getText().equals("") || p.equals("")) {
             JOptionPane.showMessageDialog(null, "Enter the User ID and Password");
-        }
-        else if(user.isUserThere(userid.getText())){
-            if(p.equals(user.userPwd(userid.getText()))){
+        } else if (user.isUserThere(userid.getText())) {
+            if (p.equals(user.userPwd(userid.getText()))) {
                 System.out.println("success");
                 user.changeUserState(userid.getText());
-                if(userid.getText().equals("admin")) {
-                    new AdminHomeGUI(user,bookList,1);
+                if (userid.getText().equals("admin")) {
+                    new AdminHomeGUI(user, bookList, 1);
                     dispose();
-                }
-                else{
-                    if(user.getUser(userid.getText()).isActivate()) {
-                        new HomeGUI(user, bookList,0);
+                } else {
+                    if (user.getUser(userid.getText()).isActivate()) {
+                        new HomeGUI(user, bookList, 0);
                         dispose();
-                    }
-                    else{
+                    } else {
                         JOptionPane.showMessageDialog(null, "Deactivated user");
                     }
                 }
 
-            }
-
-            else{
+            } else {
                 System.out.println("false");
                 JOptionPane.showMessageDialog(null, "Wrong Password Retry");
             }
-        }
-        else{
+        } else {
             System.out.println("false");
             JOptionPane.showMessageDialog(null, "Unknown User, Sign Up First!");
         }

@@ -68,7 +68,7 @@ public class ListArea extends JPanel {
         //init ui part
         setLayout(null);
         setBackground(Color.white);
-        setBounds(210, 100, 1060, 560);
+        setBounds(210, 100, 1260, 560);
 
         //상단 코멘트, border
         if(mode<4) {
@@ -129,7 +129,7 @@ public class ListArea extends JPanel {
         //mode 1 admin home
         else if(mode == 1){
             Button buyBtn = new Button("구매하기");
-            buyBtn.setBounds(760, 470, 150, 60);
+            buyBtn.setBounds(860, 470, 150, 60);
             buyBtn.setFont(ui.font3);
             buyBtn.setBackground(ui.s);
             buyBtn.setHorizontalAlignment(0);
@@ -171,7 +171,7 @@ public class ListArea extends JPanel {
             });
 
             Button delete = new Button("삭제하기");
-            delete.setBounds(600,470,150,60);
+            delete.setBounds(700,470,150,60);
             delete.setFont(ui.font3);
             delete.setBackground(ui.p4);
             delete.setHorizontalAlignment(0);
@@ -202,7 +202,7 @@ public class ListArea extends JPanel {
 
         else if(mode ==2){
             Button buyBtn = new Button("구매하기");
-            buyBtn.setBounds(760, 470, 150, 60);
+            buyBtn.setBounds(860, 470, 150, 60);
             buyBtn.setFont(ui.font3);
             buyBtn.setBackground(ui.s);
             buyBtn.setHorizontalAlignment(0);
@@ -232,7 +232,7 @@ public class ListArea extends JPanel {
             });
 
             Button gotolist = new Button("목록으로");
-            gotolist.setBounds(600,470,150,60);
+            gotolist.setBounds(700,470,150,60);
             gotolist.setFont(ui.font3);
             gotolist.setBackground(ui.p4);
             gotolist.setHorizontalAlignment(0);
@@ -257,6 +257,13 @@ public class ListArea extends JPanel {
             userIndex.setBounds(7, 30, 800, 50);
             userIndex.setBackground(ui.p);
             add(userIndex);
+
+        }
+        else if(mode ==3){
+            LineGUI bookIndex = new LineGUI("edit");
+            bookIndex.setBounds(7, 30, 1000, 50);
+            bookIndex.setBackground(ui.p);
+            add(bookIndex);
 
         }
         else{
@@ -316,7 +323,7 @@ public class ListArea extends JPanel {
         sc.getVerticalScrollBar().setBackground(Color.WHITE);
         sc.setBorder(BorderFactory.createEmptyBorder());
         lineMy = new LineList(bookArray, bookListPanel,"EDIT");
-        sc.setBounds(7, 80, 820, 380);
+        sc.setBounds(7, 80, 1020, 380);
         sc.setViewportView(bookListPanel);
         add(sc);
 

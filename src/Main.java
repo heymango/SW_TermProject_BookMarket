@@ -2,8 +2,8 @@ public class Main {
     public static void main(String[] args) throws Exception{
         UserList userList = new UserList();
         BookList bookList = new BookList();
-        String Book = "Book.csv";
-        String User = "User.csv";
+        String Book = "Book.txt";
+        String User = "User.txt";
         new ReadFileToList(userList, bookList ,User,Book);
         SignInGUI gui = new SignInGUI(userList,bookList);
         //BookGUI book = new BookGUI(userList,bookList);

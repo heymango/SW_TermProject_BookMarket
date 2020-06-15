@@ -92,6 +92,7 @@ public class HomeGUI extends JFrame {
         searchC.addItem("저자");
         searchC.addItem("출판사");
         searchC.addItem("판매자");
+        searchC.addItem("출판년도");
         searchC.setBounds(0,0,130,40);
         searchC.setFont(ui.font);
         searchC.setForeground(ui.g);

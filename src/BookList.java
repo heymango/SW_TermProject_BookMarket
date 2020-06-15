@@ -46,6 +46,9 @@ public class BookList {
             else if (selected.equals("판매자")&&book.getUser().equals(search)) {
                 searchResult.add(book);
             }
+            else if (selected.equals("출판년도")&&book.getPublishYear().equals(search)) {
+                searchResult.add(book);
+            }
         }
         return searchResult;
     }

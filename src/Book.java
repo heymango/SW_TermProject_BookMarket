@@ -12,9 +12,9 @@ public class Book {
     private String condition;
     private final String user;
     private List bookInfo = null;
-    private int index;
+    private String price;
    // String[] cond = {"Excellent", "Good", "Fair"};
-    public Book(String Title, String isbn, String Author, String Publisher, String PublishYear, String Condition, String User){
+    public Book(String Title, String isbn, String Author, String Publisher, String PublishYear, String Condition, String User, String Price){
         title =Title;
         ISBN =isbn;
         author =Author;
@@ -22,6 +22,7 @@ public class Book {
         publishYear = PublishYear;
         condition = Condition;
         user = User;
+        price = Price;
     }
 
     public void setBookInfo(List bookInfo) {
@@ -56,9 +57,12 @@ public class Book {
         return title;
     }
 
-
     public String getUser() {
         return user;
+    }
+
+    public String getPrice() {
+        return price;
     }
 
     public void setAuthor(String author) {
@@ -84,15 +88,13 @@ public class Book {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
     public void print(){
         System.out.println("title:"+title+"user:"+user+"\n");
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public void setIndex(int index) {
-        this.index = index;
-    }
 }

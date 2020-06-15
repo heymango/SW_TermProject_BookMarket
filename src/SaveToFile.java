@@ -9,8 +9,8 @@ import java.nio.file.Paths;
 public class SaveToFile {
     UserList userList;
     BookList bookList;
-    String Book = "Book.csv";
-    String User= "User.csv";
+    String Book = "Book.txt";
+    String User= "User.txt";
     public SaveToFile(UserList UserList, BookList BookList, String UserFileName, String BookFileNme){
         User = UserFileName;
         Book = BookFileNme;
@@ -33,49 +33,54 @@ public class SaveToFile {
         try{
             bufWriter = Files.newBufferedWriter(Paths.get(Book), StandardCharsets.UTF_8);
             bufWriter.write("Title");
-            bufWriter.write(",");
+            bufWriter.write("|");
             bufWriter.write("ISBN");
-            bufWriter.write(",");
+            bufWriter.write("|");
             bufWriter.write("Author");
-            bufWriter.write(",");
+            bufWriter.write("|");
             bufWriter.write("Publisher");
-            bufWriter.write(",");
+            bufWriter.write("|");
             bufWriter.write("Year");
-            bufWriter.write(",");
+            bufWriter.write("|");
             bufWriter.write("Condition");
-            bufWriter.write(",");
+            bufWriter.write("|");
             bufWriter.write("Owner");
             bufWriter.newLine();
             for(Book book : bookList.bookArray){
                 bufWriter.write(book.getTitle());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(book.getISBN());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(book.getAuthor());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(book.getPublisher());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(book.getPublishYear());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(book.getCondition());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(book.getUser());
+                bufWriter.write("|");
+                bufWriter.write(book.getPrice());
                 if(book.getBookInfo()!=null) {
+                    bufWriter.write("|");
                     bufWriter.write(book.getBookInfo().getItem(0));
-                    bufWriter.write(",");
+                    bufWriter.write("|");
                     bufWriter.write(book.getBookInfo().getItem(1));
-                    bufWriter.write(",");
+                    bufWriter.write("|");
                     bufWriter.write(book.getBookInfo().getItem(2));
-                    bufWriter.write(",");
+                    bufWriter.write("|");
                     bufWriter.write(book.getBookInfo().getItem(3));
-                    bufWriter.write(",");
+                    bufWriter.write("|");
                     bufWriter.write(book.getBookInfo().getItem(4));
-                    bufWriter.write(",");
+                    bufWriter.write("|");
                     bufWriter.write(book.getBookInfo().getItem(5));
-                    bufWriter.write(",");
+                    bufWriter.write("|");
                     bufWriter.write(book.getBookInfo().getItem(6));
-                    bufWriter.write(",");
+                    bufWriter.write("|");
                     bufWriter.write(book.getBookInfo().getItem(7));
+                    bufWriter.write("|");
+                    bufWriter.write(book.getBookInfo().getItem(8));
                     bufWriter.newLine();
                 }
             }
@@ -99,19 +104,19 @@ public class SaveToFile {
 
             for(User user : userList.userArray){
                 bufWriter.write(user.getId());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(user.getPassword());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(user.getUsername());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(user.getPhone());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(user.getEmail());
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(Boolean.toString(user.isActivate()));
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write(Boolean.toString(user.isAdmin()));
-                bufWriter.write(",");
+                bufWriter.write("|");
                 bufWriter.write("false");
                 bufWriter.newLine();
             }

@@ -63,7 +63,7 @@ public class BookInfo extends JFrame {
         title.setBackground(ui.p4);
         line.add(title);
 
-        String info ="<html>"+object.getItem(3)+" 지음 | "+object.getItem(4)+" 출판 | "+object.getItem(5)+"</html>";
+        String info ="<html>"+object.getItem(3)+" 지음 | "+object.getItem(4)+" 출판 | "+object.getItem(5)+" | 원가: "+object.getItem(8)+"</html>";
         JLabel infoL = new JLabel(info);
         infoL.setFont(ui.font4);
         infoL.setBounds(100,55,750,20);

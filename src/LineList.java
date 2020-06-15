@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class LineList {
     ArrayList<LineGUI> lineArray = new ArrayList<LineGUI>();
+    ArrayList<List> info = new ArrayList<List>();
     public LineList(ArrayList<Book> bookList, JPanel bookListPanel){
         int i = 0;
         for (i = 0; i < bookList.size(); i++) {
@@ -23,11 +24,12 @@ public class LineList {
             Book book = bookList.get(i);
             LineGUI bookInfo = new LineGUI(book,edit);
             lineArray.add(bookInfo);
-            bookInfo.setBounds(0, 50 * i, 800, 50);
+            info.add(book.getBookInfo());
+            bookInfo.setBounds(0, 50 * i, 1000, 50);
             bookListPanel.add(bookInfo);
             bookInfo.setBackground(Color.WHITE);
         }
-        bookListPanel.setPreferredSize(new Dimension(800,50*i));
+        bookListPanel.setPreferredSize(new Dimension(1000,50*i));
     }
 
 

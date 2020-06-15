@@ -33,7 +33,7 @@ public class ReadFileToList {
             String line = "";
             while((line = br1.readLine()) != null){
                 //CSV 1행을 저장하는 리스트
-                String[] array = line.split(",");
+                String[] array = line.split("\\|");
                 //배열에서 리스트 반환
                 userList.addUser(new User(array[0],array[1],array[2],array[3],array[4],Boolean.parseBoolean(array[5]),Boolean.parseBoolean(array[6])));
             }
@@ -59,17 +59,19 @@ public class ReadFileToList {
             String line = "";
             line = br2.readLine();
             while((line = br2.readLine()) != null){
-                String [] array =line.split(",");
-                Book book = new Book(array[0],array[1],array[2],array[3],array[4],array[5],array[6]);
-                if(array.length>7) {
+                String [] array =line.split("\\|");
+                Book book = new Book(array[0],array[1],array[2],array[3],array[4],array[5],array[6],array[7]);
+                if(array.length>8) {
                     List info = new List();
-                    info.add(array[7]);
                     info.add(array[8]);
                     info.add(array[9]);
                     info.add(array[10]);
                     info.add(array[11]);
                     info.add(array[12]);
                     info.add(array[13]);
+                    info.add(array[14]);
+                    info.add(array[15]);
+                    info.add(array[16]);
                     book.setBookInfo(info);
                 }
                 bookList.addBook(book);

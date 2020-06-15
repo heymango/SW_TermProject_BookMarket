@@ -118,7 +118,7 @@ public class APIBookSearch extends JFrame {
         Image image =null;
 
         String u = object.get("image").getAsString();
-        System.out.println(u);
+
         try {
             url = new URL(u);
             image = ImageIO.read(url);
@@ -133,7 +133,6 @@ public class APIBookSearch extends JFrame {
             img.setFont(ui.font);
             img.setForeground(ui.p4);
         } catch (IOException e) {
-            e.printStackTrace();
             JLabel img = new JLabel("No Image");
             line.add(img);
             img.setBounds(0,0,90,130);
@@ -150,7 +149,7 @@ public class APIBookSearch extends JFrame {
         title.setBackground(ui.p4);
         line.add(title);
 
-        String info ="<html>"+object.get("author").getAsString()+" 지음 | "+object.get("publisher").getAsString()+" 출판 | "+object.get("pubdate").getAsString()+"</html>";
+        String info ="<html>"+object.get("author").getAsString()+" 지음 | "+object.get("publisher").getAsString()+" 출판 | "+object.get("pubdate").getAsString()+" | 원가: "+object.get("price").getAsString()+"</html>";
         JLabel infoL = new JLabel(info);
         infoL.setFont(ui.font4);
         infoL.setBounds(100,55,750,20);
@@ -213,14 +212,16 @@ public class APIBookSearch extends JFrame {
         String year = publishyear.substring(0,4);
         String isbn = isbn13(object.get("isbn").getAsString());
         String link = object.get("link").getAsString();
-        String description = object.get("description").getAsString();
+        String description = object.get("description").getAsString().replaceAll("(\r\n|\r|\n|\n\r)", " ");
         String image = object.get("image").getAsString();
+        String price = object.get("price").getAsString();
 
-        bookGUI.title.setText(title);
-        bookGUI.author.setText(author);
-        bookGUI.ISBN.setText(isbn);
-        bookGUI.publisher.setText(publisher);
-        bookGUI.year.setText(year);
+        bookGUI.setTitle(title);
+        bookGUI.setAuthor(author);
+        bookGUI.setISBN(isbn);
+        bookGUI.setPublisher(publisher);
+        bookGUI.setYear(year);
+        bookGUI.setPrice(price);
 
         List bookInfo = new List();
         bookInfo.add(title);
@@ -231,7 +232,7 @@ public class APIBookSearch extends JFrame {
         bookInfo.add(year);
         bookInfo.add(isbn);
         bookInfo.add(description);
-
+        bookInfo.add(price);
         bookGUI.info = bookInfo;
 
 

@@ -17,7 +17,7 @@ public class MyBook extends JFrame {
         this.home = home;
         this.userList = userList;
         this.bookList = bookList;
-        setSize(880,640);
+        setSize(1080,640);
         init();
         JPanel background = new JPanel();
         background.setBackground(Color.WHITE);
@@ -25,7 +25,7 @@ public class MyBook extends JFrame {
         myBook.bookArray = bookList.searchBook(userList.whoSignin().getId(),"판매자");
         edit = new ListArea(myBook,userList,3);
         background.add(edit);
-        edit.setBounds(0,0,860,600);
+        edit.setBounds(0,0,1060,600);
         button(edit);
         add(background);
     }
@@ -33,7 +33,7 @@ public class MyBook extends JFrame {
     public MyBook(User user, BookList bookList){
         super("User's Book");
         this.bookList = bookList;
-        setSize(880,640);
+        setSize(1080,640);
         init();
         JPanel background = new JPanel();
         background.setBackground(Color.WHITE);
@@ -41,7 +41,7 @@ public class MyBook extends JFrame {
         myBook.bookArray = bookList.searchBook(user.getId(),"판매자");
         edit = new ListArea(myBook,userList,3);
         background.add(edit);
-        edit.setBounds(0,0,860,600);
+        edit.setBounds(0,0,1000,600);
         add(background);
     }
 
@@ -55,7 +55,7 @@ public class MyBook extends JFrame {
 
     public void button(ListArea edit){
         Button editBtn = new Button("수정하기");
-        editBtn.setBounds(660, 470, 150, 60);
+        editBtn.setBounds(860, 470, 150, 60);
         editBtn.setFont(ui.font3);
         editBtn.setBackground(ui.s);
         editBtn.setHorizontalAlignment(0);
@@ -72,7 +72,9 @@ public class MyBook extends JFrame {
                     String year = edit.lineMy.lineArray.get(i).publishyear.getText();
                     String condition = edit.lineMy.lineArray.get(i).condition.getSelectedItem().toString();
                     String owner = edit.lineMy.lineArray.get(i).owner.getText();
-                    Book book = new Book(title,isbn,author,publisher,year,condition,owner);
+                    String price = edit.lineMy.lineArray.get(i).price.getText();
+                    Book book = new Book(title,isbn,author,publisher,year,condition,owner,price);
+                    book.setBookInfo(edit.lineMy.info.get(i));
                     int index = bookList.bookArray.indexOf(edit.lineMy.lineArray.get(i).book);
                     bookList.bookArray.set(index,book);
 
@@ -85,7 +87,7 @@ public class MyBook extends JFrame {
         });
 
         Button deleteBtn = new Button("삭제하기");
-        deleteBtn.setBounds(480, 470, 150, 60);
+        deleteBtn.setBounds(680, 470, 150, 60);
         deleteBtn.setFont(ui.font3);
         deleteBtn.setBackground(ui.s);
         deleteBtn.setHorizontalAlignment(0);

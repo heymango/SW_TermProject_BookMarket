@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class SignUpGUI extends JFrame {
+    UI ui = new UI();
     UserList userList;
     BookList bookList;
     private JTextField userid;
@@ -30,20 +31,18 @@ public class SignUpGUI extends JFrame {
     }
 
     public void signUpPanel(JPanel panel){
-        Font font1 = new Font("배달의민족 을지로체 TTF",0,25);
-        Font font2 = new Font("배달의민족 을지로체 TTF",0,15);
         panel.setLayout(null);
         panel.setBackground(Color.WHITE);
 
         JLabel signUpText = new JLabel("Sign Up");
         signUpText.setBounds(10, 10, 500, 30);
-        signUpText.setFont(font1);
+        signUpText.setFont(ui.font2);
         panel.add(signUpText);
 
         JLabel userIDText = new JLabel("User ID");
         userIDText.setForeground(new Color(51,51,51));
         userIDText.setBounds(10, 70, 80, 25);
-        userIDText.setFont(font2);
+        userIDText.setFont(ui.font);
         panel.add(userIDText);
 
         userid = new JTextField(20);
@@ -59,7 +58,7 @@ public class SignUpGUI extends JFrame {
         JLabel pwdText = new JLabel("Password");
         pwdText.setForeground(new Color(51,51,51));
         pwdText.setBounds(10, 110, 80, 25);
-        pwdText.setFont(font2);
+        pwdText.setFont(ui.font);
         panel.add(pwdText);
 
         JTextField pwd = new JTextField(20);
@@ -69,7 +68,7 @@ public class SignUpGUI extends JFrame {
         JLabel nameText = new JLabel("Name");
         nameText.setForeground(new Color(51,51,51));
         nameText.setBounds(10, 150, 80, 25);
-        nameText.setFont(font2);
+        nameText.setFont(ui.font);
         panel.add(nameText);
 
         JTextField name = new JTextField(20);
@@ -80,7 +79,7 @@ public class SignUpGUI extends JFrame {
         JLabel phoneText = new JLabel("Phone");
         phoneText.setForeground(new Color(51,51,51));
         phoneText.setBounds(10, 190, 80, 25);
-        phoneText.setFont(font2);
+        phoneText.setFont(ui.font);
         panel.add(phoneText);
 
         JTextField phone1 = new JTextField(20);
@@ -89,7 +88,7 @@ public class SignUpGUI extends JFrame {
 
         JLabel p1 = new JLabel("-");
         p1.setBounds(140, 190, 20, 25);
-        p1.setFont(font2);
+        p1.setFont(ui.font);
         p1.setHorizontalAlignment(JLabel.CENTER);
         panel.add(p1);
 
@@ -99,7 +98,7 @@ public class SignUpGUI extends JFrame {
 
         JLabel p2 = new JLabel("-");
         p2.setBounds(230, 190, 20, 25);
-        p2.setFont(font2);
+        p2.setFont(ui.font);
         p2.setHorizontalAlignment(JLabel.CENTER);
         panel.add(p2);
 
@@ -115,7 +114,7 @@ public class SignUpGUI extends JFrame {
         JLabel mailText = new JLabel("Email");
         mailText.setForeground(new Color(51,51,51));
         mailText.setBounds(10, 230, 80, 25);
-        mailText.setFont(font2);
+        mailText.setFont(ui.font);
         panel.add(mailText);
 
         JTextField mail1 = new JTextField(20);
@@ -124,7 +123,7 @@ public class SignUpGUI extends JFrame {
 
         JLabel m = new JLabel("@");
         m.setBounds(220, 230, 30, 25);
-        m.setFont(font2);
+        m.setFont(ui.font);
         m.setHorizontalAlignment(JLabel.CENTER);
         panel.add(m);
 
@@ -155,8 +154,8 @@ public class SignUpGUI extends JFrame {
         });
     }
 
-    private void onlyNumber(JTextField phone) {
-        phone.addKeyListener(new KeyListener() {
+    private void onlyNumber(JTextField num) {
+        num.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
                 char c = e.getKeyChar();
@@ -220,12 +219,16 @@ public class SignUpGUI extends JFrame {
             JOptionPane.showMessageDialog(null, "Enter Email");
             return;
         }
-        if(Id.equals("admin")){
-            User user = new User(Id,Pwd,Name,Phone,Mail,true,true);
-        }
 
-        User user = new User(Id,Pwd,Name,Phone,Mail,true,false);
+        User user;
+        if(Id.equals("admin")){
+            user = new User(Id, Pwd, Name, Phone, Mail, true, true);
+        }
+        else {
+            user = new User(Id, Pwd, Name, Phone, Mail, true, false);
+        }
         userList.addUser(user);
+
         JOptionPane.showMessageDialog(null, "Sign Up Success!");
         new SignInGUI(userList,bookList);
         dispose();

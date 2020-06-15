@@ -6,24 +6,25 @@ import netscape.javascript.JSObject;
 import java.io.*;
 import java.net.*;
 
+import java.net.http.HttpHeaders;
 import java.util.HashMap;
 import java.util.Map;
 
 public class ApiSearch {
 
     public static void main(String[] args) {
-        String clientId = "v52j4T22yo2wytf7XVU9";
-        String clientSecret = "CbVNOBbeBo";
+        String clientId = "KakaoAK 993196a87417a24b44b200335ae8b947";
+
         String query = null;
         try {
-            query = URLEncoder.encode("한강","UTF-8");
+            query = URLEncoder.encode("미움받을 용기","UTF-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
         URL url = null;
         try {
-            url = new URL("https://openapi.naver.com/v1/search/book_adv.json?d_auth="+query+"&display=100");
+            url = new URL("https://dapi.kakao.com/v3/search/book?target=title");
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
@@ -34,10 +35,10 @@ public class ApiSearch {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        JsonParser json = new JsonParser();
 
-        urlConn.setRequestProperty("X-Naver-Client-ID", clientId);
-        urlConn.setRequestProperty("X-Naver-Client-Secret", clientSecret);
+        JsonParser json = new JsonParser();
+        assert urlConn != null;
+        urlConn.setRequestProperty("Authorization",clientId);
 
         BufferedReader br = null;
         try {
@@ -59,10 +60,13 @@ public class ApiSearch {
             b.append(msg);
         }
 
+
+/*
         String result = b.toString();
         JsonParser Parser = new JsonParser();
         JsonObject jsonObj = (JsonObject) Parser.parse(result);
-        JsonArray memberArray = (JsonArray) jsonObj.get("items");
+        System.out.println(jsonObj);
+       JsonArray memberArray = (JsonArray) jsonObj.get("items");
 
         for (int i = 0; i < memberArray.size(); i++) {
             JsonObject object = (JsonObject) memberArray.get(i);
@@ -75,5 +79,9 @@ public class ApiSearch {
             System.out.println("ISBN : " + object.get("isbn"));
             System.out.println("------------------------");
         }
+          */
+
     }
+
+
 }

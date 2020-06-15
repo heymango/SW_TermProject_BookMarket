@@ -21,12 +21,28 @@ public class LineGUI extends JPanel {
     Button userBook;
     Font font = new Font("배달의민족 한나체 Pro",0,17);
     JLabel checkbox;
-    JTextField title, isbn, author, publisher, publishyear;
+    JTextField title, isbn, author, publisher, publishyear,price;
     JComboBox<String> condition = new JComboBox<String>();
     JLabel owner;
 
     public LineGUI(String type){
         if(type.equals("book")) {
+            setLayout(new GridLayout(1, 11));
+            setVisible(true);
+            setBackground(Color.white);
+            checkbox = new JLabel("");
+            add(checkbox);
+            add(init("제목"));
+            add(init("ISBN"));
+            add(init("저자"));
+            add(init("출판사"));
+            add(init("출판년도"));
+            add(init("상태"));
+            add(init("판매자"));
+            add(init("가격"));
+            add(init("상세정보"));
+        }
+        else if(type.equals("edit")) {
             setLayout(new GridLayout(1, 10));
             setVisible(true);
             setBackground(Color.white);
@@ -39,7 +55,7 @@ public class LineGUI extends JPanel {
             add(init("출판년도"));
             add(init("상태"));
             add(init("판매자"));
-            add(init("상세정보"));
+            add(init("가격"));
         }
         else if(type.equals("user")){
             setLayout(new GridLayout(1,8));
@@ -128,7 +144,8 @@ public class LineGUI extends JPanel {
         String publishyear = book.getPublishYear();
         String condition = book.getCondition();
         String owner= book.getUser();
-        setLayout(new GridLayout(1,10));
+        String price = book.getPrice();
+        setLayout(new GridLayout(1,11));
         setVisible(true);
         setBackground(Color.white);
 
@@ -145,7 +162,9 @@ public class LineGUI extends JPanel {
         add(init2(publishyear));
         add(init2(condition));
         add(init2(owner));
+        add(init2(price));
         add(info);
+
         checkbox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
@@ -173,7 +192,8 @@ public class LineGUI extends JPanel {
         String publishyear = book.getPublishYear();
         String condition = book.getCondition();
         String owner= book.getUser();
-        setLayout(new GridLayout(1,9));
+        String price = book.getPrice();
+        setLayout(new GridLayout(1,11));
         setVisible(true);
         setBackground(Color.white);
 
@@ -185,7 +205,7 @@ public class LineGUI extends JPanel {
         this.isbn = new JTextField(isbn);
         this.publisher = new JTextField(publisher);
         this.publishyear = new JTextField(publishyear);
-
+        this.price = new JTextField(price);
         this.condition.addItem("Excellent");
         this.condition.addItem("Good");
         this.condition.addItem("Fair");
@@ -200,11 +220,10 @@ public class LineGUI extends JPanel {
         init3(this.author);
         init3(this.publisher);
         init3(this.publishyear);
-
+        init3(this.price);
         this.owner.setFont(font);
         this.owner.setHorizontalAlignment(JLabel.CENTER);
         this.owner.setBorder(BorderFactory.createEmptyBorder());
-
         add(checkbox);
         add(this.title);
         add(this.isbn);
@@ -213,6 +232,7 @@ public class LineGUI extends JPanel {
         add(this.publishyear);
         add(this.condition);
         add(this.owner);
+        add(this.price);
         checkbox.addItemListener(new ItemListener() {
             @Override
             public void itemStateChanged(ItemEvent e) {
